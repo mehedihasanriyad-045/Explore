@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:weightSum="15555"
+    android:background="@android:color/holo_blue_dark"
+    tools:context=".Menu">
+
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_weight="1"
+        android:layout_width="100dp"
+        android:layout_height="85dp"
+        android:layout_margin="5dp"
+        app:srcCompat="@android:drawable/ic_menu_myplaces" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:text="@string/explorebd"
+        android:textColor="#FFFF"
+        android:textSize="25sp"/>
+
+    <Button
+        android:layout_weight="1"
+        android:id="@+id/bt_Review"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:text="@string/review"/>
+
+    <Button
+        android:layout_weight="1"
+        android:id="@+id/bt_tourplan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:text="@string/plan" />
+
+    <Button
+        android:id="@+id/bt_wtitereview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:layout_weight="1"
+        android:text="@string/writereview" />
+
+    <Button
+        android:layout_weight="1"
+        android:id="@+id/bt_Find"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:text="@string/Find" />
+</LinearLayout>

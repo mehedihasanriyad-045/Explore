@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Explore Bangladesh</string>
+    <string name="welcome">Welcome to Explore Bangladesh</string>
+    <string name="Menu">Go to main Menu</string>
+    <string name="review">Review</string>
+    <string name="plan">Create A Plan</string>
+    <string name="writereview">Write A Review</string>
+    <string name="Find">Find Helpful Information</string>
+    <string name="explorebd">Explore Bangladesh</string>
+    <string name="title_activity_create_plan">CreatePlan</string>
+    <string name="large_text">
+        "Create Your plan here"
+    </string>
+    <string name="action_settings">Settings</string>
+</resources>
+    
