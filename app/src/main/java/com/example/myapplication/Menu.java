@@ -24,12 +24,12 @@ public class Menu extends AppCompatActivity {
             }
         });
 
-        bt_plan = (Button) findViewById(R.id.bt_tourplan);
+        bt_plan = (Button) findViewById(R.id.bt_wtitereview);
 
         bt_plan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(Menu.this,CretePlan.class);
+                Intent intent1 = new Intent(Menu.this,WriteReview.class);
                 startActivity(intent1);
             }
         });
