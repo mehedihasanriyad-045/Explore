@@ -32,13 +32,14 @@
         android:textSize="25sp"/>
 
     <Button
-        android:layout_weight="1"
         android:id="@+id/bt_Review"
+        style="@android:style/Widget.Material.Light.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
         android:layout_marginEnd="70dp"
-        android:text="@string/review"/>
+        android:layout_weight="1"
+        android:text="@string/review" />
 
     <Button
         android:layout_weight="1"

@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class Menu extends AppCompatActivity {
 
-    private Button bt_review ,bt_plan;
+    private Button bt_review ,bt_plan, bt_tourplan;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,5 +33,17 @@ public class Menu extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
+
+        bt_tourplan = (Button) findViewById(R.id.bt_tourplan);
+
+        bt_tourplan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(Menu.this, CreatePlan.class);
+                startActivity(intent2);
+            }
+        });
+
+
     }
 }

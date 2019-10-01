@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".WriteReview"></activity>
-        <activity android:name=".CretePlan" />
+        <activity android:name=".CreatePlan" />
         <activity android:name=".Review" />
         <activity android:name=".Menu" />
         <activity android:name=".MainActivity">
