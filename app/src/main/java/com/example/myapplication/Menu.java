@@ -1,19 +1,28 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Menu extends AppCompatActivity {
 
     private Button bt_review ,bt_plan;
+    FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        mAuth = FirebaseAuth.getInstance();
+
+
         bt_review = (Button) findViewById(R.id.bt_Review);
 
         bt_review.setOnClickListener(new View.OnClickListener() {
@@ -33,5 +42,26 @@ public class Menu extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_layout,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId() == R.id.signOutMenuId)
+        {
+            FirebaseAuth.getInstance().signOut();
+            finish();
+            Intent intent = new Intent(getApplicationContext(),LogIn.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

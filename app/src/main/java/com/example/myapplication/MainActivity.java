@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
 
     private Button button;
@@ -18,13 +18,18 @@ public class MainActivity extends AppCompatActivity {
 
         button = (Button) findViewById(R.id.bt_wel);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        button.setOnClickListener(this);
 
-                Intent intent = new Intent(MainActivity.this,Menu.class);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.bt_wel:
+                Intent intent = new Intent(getApplicationContext(),LogIn.class);
                 startActivity(intent);
-            }
-        });
+                break;
+        }
     }
 }
