@@ -17,6 +17,7 @@ public class WriteReview extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_review);
+        this.setTitle("Write your review here");
 
         mAuth = FirebaseAuth.getInstance();
     }
