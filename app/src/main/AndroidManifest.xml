@@ -14,14 +14,17 @@
         <activity android:name=".WriteReview" />
 
         <activity android:name=".Review" />
+        <activity android:name=".CreatePlan"/>
         <activity android:name=".Menu" />
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CreatePlanDetails" />
     </application>
 
 </manifest>

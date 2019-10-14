@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Menu extends AppCompatActivity {
 
-    private Button bt_review ,bt_plan;
+    private Button bt_review ,bt_plan, bt_tour;
     FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class Menu extends AppCompatActivity {
         });
 
 
-        Button bt_tour = (Button) findViewById(R.id.bt_history);
+        bt_tour = (Button) findViewById(R.id.bt_tourplan);
 
         bt_tour.setOnClickListener(new View.OnClickListener() {
             @Override
