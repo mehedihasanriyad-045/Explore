@@ -43,6 +43,18 @@ public class Menu extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
+
+
+        Button bt_tour = (Button) findViewById(R.id.bt_history);
+
+        bt_tour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(Menu.this,CreatePlan.class);
+                startActivity(intent2);
+            }
+        });
+
     }
 
     @Override

@@ -42,7 +42,7 @@
 
     <Button
         android:layout_weight="1"
-        android:id="@+id/bt_tourplan"
+        android:id="@+id/bt_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"

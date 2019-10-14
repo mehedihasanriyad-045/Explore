@@ -10,15 +10,15 @@ import android.view.MenuItem;
 import com.google.firebase.auth.FirebaseAuth;
 
 
-public class Review extends AppCompatActivity {
+public class CreatePlan extends AppCompatActivity {
 
     FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_review);
-        this.setTitle("Places' Review");
+        setContentView(R.layout.activity_create_plan);
+
         mAuth = FirebaseAuth.getInstance();
     }
 
