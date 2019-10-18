@@ -7,29 +7,16 @@
     android:gravity="center"
     android:orientation="vertical"
     android:weightSum="15555"
-    android:background="@drawable/background"
     tools:context=".Menu">
 
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_weight="1"
         android:layout_width="100dp"
         android:layout_height="85dp"
         android:layout_margin="5dp"
-        app:srcCompat="@android:drawable/ic_menu_myplaces" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_margin="5dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginEnd="70dp"
-        android:text="@string/explorebd"
-        android:textColor="#FFFF"
-        android:textSize="25sp"/>
+        app:srcCompat="@drawable/icon" />
 
     <Button
         android:layout_weight="1"
@@ -38,7 +25,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
         android:layout_marginEnd="70dp"
-        android:text="@string/review"/>
+        android:text="@string/review"
+        android:background="@drawable/buttonshape"
+        android:textColor="#FFFFFF"/>
 
     <Button
         android:layout_weight="1"
@@ -47,7 +36,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
         android:layout_marginEnd="70dp"
-        android:text="@string/plan" />
+        android:text="@string/plan"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/buttonshape"/>
 
     <Button
         android:id="@+id/bt_wtitereview"
@@ -56,7 +47,9 @@
         android:layout_marginStart="70dp"
         android:layout_marginEnd="70dp"
         android:layout_weight="1"
-        android:text="@string/writereview" />
+        android:text="@string/writereview"
+        android:background="@drawable/buttonshape"
+        android:textColor="#FFFFFF"/>
 
     <Button
         android:layout_weight="1"
@@ -65,5 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
         android:layout_marginEnd="70dp"
-        android:text="@string/Find" />
+        android:text="@string/Find"
+        android:background="@drawable/buttonshape"
+        android:textColor="#FFFFFF"/>
 </LinearLayout>

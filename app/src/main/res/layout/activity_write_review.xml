@@ -77,7 +77,7 @@
         android:id="@+id/button3"
         android:layout_width="152dp"
         android:layout_height="63dp"
-        android:background="@drawable/ic_launcher_background"
+        android:background="@drawable/buttonshape"
 
         android:text="Submit"
         android:textColor="#EBEEF0"

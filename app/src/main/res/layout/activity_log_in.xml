@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/background"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#FFFFFF">
 
     <ImageView
-        app:srcCompat="@android:drawable/ic_menu_myplaces"
+        app:srcCompat="@drawable/icon"
         android:layout_marginBottom="20dp"
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -22,11 +22,14 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:hint="E-mail"
-        android:drawableLeft="@drawable/ic_email"
-        android:textColor="#FFFFFFFF"
+        android:drawableLeft="@drawable/ic_email_black_24dp"
+        android:textColor="#000000"
         android:id="@+id/signInEmailId"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:backgroundTint="@android:color/black"
+        android:textColorHighlight="@color/colorPrimaryDark"/>
+
     <EditText
         android:inputType="textPassword"
         android:textStyle="bold"
@@ -35,8 +38,8 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:hint="Passowrd"
-        android:drawableLeft="@drawable/ic_password"
-        android:textColor="#FFFFFFFF"
+        android:drawableLeft="@drawable/ic_lock_black_24dp"
+        android:textColor="#000000"
         android:id="@+id/signInpasswordId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -45,7 +48,7 @@
         android:id="@+id/login_btn"
         android:layout_width="127dp"
         android:layout_height="40dp"
-        android:background="@drawable/ic_launcher_background"
+        android:background="@drawable/buttonshape"
         android:text="Log In"
         android:textColor="#FFFFFF"
         android:textSize="15sp" />
@@ -54,18 +57,18 @@
         android:textSize="17sp"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
-        android:text="Forgot your password?"
-        android:textColor="#FFFFFFFF"
+        android:text="@string/Forgot"
+        android:textColor="#000000"
         android:id="@+id/signInforgetPasswordtextviewid"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
     <TextView
         android:textSize="17sp"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
-        android:text="Sign Up here"
-        android:textColor="#FFFFFFFF"
+        android:text="@string/SignUp"
+        android:textColor="#000000"
         android:id="@+id/signInSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

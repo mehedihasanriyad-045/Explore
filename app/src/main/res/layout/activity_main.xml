@@ -4,61 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context=".MainActivity">
-
-    <Button
-        android:id="@+id/bt_wel"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="282dp"
-        android:layout_height="61dp"
-        android:background="@drawable/ic_launcher_background"
-        android:text="@string/Menu"
-        android:textColor="#FFFFFF"
-        android:textColorHighlight="#FFFFFF"
-        android:textColorLink="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.625"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.612" />
+    tools:context=".MainActivity"
+    android:background="#FFFFFF">
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="236dp"
-        android:layout_height="208dp"
+        android:layout_width="201dp"
+        android:layout_height="172dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.24"
-        app:srcCompat="@android:drawable/ic_menu_myplaces" />
+        app:layout_constraintVertical_bias="0.332"
+        app:srcCompat="@drawable/icon" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="287dp"
-        android:layout_height="49dp"
-        android:text="@string/explorebd"
-        android:textColor="#FFFF"
-        android:textSize="30sp"
+    <Button
+        android:id="@+id/bt_getStarted"
+        android:layout_width="220dp"
+        android:layout_height="55dp"
+        android:background="@drawable/get"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.653"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.549"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.72" />
+        app:layout_constraintVertical_bias="0.837" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".Review">
 
 
     <Button
         android:id="@+id/button"
-        android:background="@drawable/ic_launcher_background"
+        android:background="@drawable/buttonshape"
         android:layout_width="104dp"
         android:layout_height="51dp"
         android:layout_alignParentStart="true"
@@ -31,7 +30,7 @@
 
     <Button
         android:layout_width="104dp"
-        android:background="@drawable/ic_launcher_background"
+        android:background="@drawable/buttonshape"
         android:layout_height="51dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -51,7 +50,7 @@
 
     <Button
         android:id="@+id/button2"
-        android:background="@drawable/ic_launcher_background"
+        android:background="@drawable/buttonshape"
         android:layout_width="104dp"
         android:layout_height="51dp"
         android:layout_alignParentStart="true"
@@ -72,7 +71,7 @@
 
     <Button
         android:layout_width="104dp"
-        android:background="@drawable/ic_launcher_background"
+        android:background="@drawable/buttonshape"
         android:layout_height="51dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -92,7 +91,7 @@
 
     <Button
         android:layout_width="104dp"
-        android:background="@drawable/ic_launcher_background"
+        android:background="@drawable/buttonshape"
         android:layout_height="51dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -112,7 +111,7 @@
 
     <Button
         android:layout_width="104dp"
-        android:background="@drawable/ic_launcher_background"
+        android:background="@drawable/buttonshape"
         android:layout_height="51dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -132,7 +131,7 @@
 
     <Button
         android:layout_width="104dp"
-        android:background="@drawable/ic_launcher_background"
+        android:background="@drawable/buttonshape"
         android:layout_height="51dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -152,7 +151,7 @@
 
     <Button
         android:layout_width="104dp"
-        android:background="@drawable/ic_launcher_background"
+        android:background="@drawable/buttonshape"
         android:layout_height="51dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -180,21 +179,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.166"
-        app:srcCompat="@android:drawable/ic_menu_myplaces"
-        tools:src="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="233dp"
-        android:layout_height="53dp"
-        android:text="@string/explorebd"
-        android:textColor="#004640"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.358" />
+        app:srcCompat="@drawable/icon"
+        tools:src="@drawable/icon" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

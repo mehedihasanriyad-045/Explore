@@ -12,5 +12,11 @@
         "Create Your plan here"
     </string>
     <string name="action_settings">Settings</string>
+    <string name="nav_open">Openr</string>
+    <string name="nav_close">Close</string>
+    <string name="Forgot">Forgot Your Password?</string>
+    <string name="SignUp">"Didn't have any account? Sign Up here."</string>
+
+
 </resources>
     

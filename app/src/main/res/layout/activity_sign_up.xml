@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/background"
+    android:background="#FFFFFF"
     tools:context=".MainActivity">
 
     <ImageView
-        app:srcCompat="@android:drawable/ic_menu_myplaces"
-        android:layout_marginBottom="10dp"
         android:layout_width="90dp"
-        android:layout_height="90dp"/>
+        android:layout_height="90dp"
+        android:layout_marginBottom="10dp"
+        app:srcCompat="@drawable/icon" />
 
     <EditText
         android:textStyle="bold"
@@ -22,10 +22,11 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:hint="Your Name"
-        android:textColor="#FFFFFFFF"
+        android:textColor="#000000"
         android:id="@+id/signUpnameId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_person_black_24dp"
         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "/>
 
     <EditText
@@ -35,9 +36,10 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:hint="E-mail"
-        android:textColor="#FFFFFFFF"
+        android:textColor="#000000"
         android:id="@+id/signUpemailId"
         android:layout_width="match_parent"
+        android:drawableLeft="@drawable/ic_email_black_24dp"
         android:layout_height="wrap_content" />
 
     <EditText
@@ -48,8 +50,9 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:hint="Passowrd"
-        android:textColor="#FFFFFFFF"
+        android:textColor="#000000"
         android:id="@+id/signUppasswordId"
+        android:drawableLeft="@drawable/ic_lock_black_24dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -57,7 +60,7 @@
         android:id="@+id/signup_btn"
         android:layout_width="180dp"
         android:layout_height="60dp"
-        android:background="@drawable/ic_launcher_background"
+        android:background="@drawable/buttonshape"
         android:shadowColor="#2F9636"
         android:shadowDx="0"
         android:shadowDy="0"

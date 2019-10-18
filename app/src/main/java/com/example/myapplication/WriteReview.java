@@ -9,7 +9,7 @@ import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class WriteReview extends AppCompatActivity {
+public class WriteReview extends MainActivity {
 
     FirebaseAuth mAuth;
 
