@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Menu extends AppCompatActivity {
 
-    private Button bt_review , bt_writereview;
+    private Button bt_review , bt_writereview, bt_tourplan;
     FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +49,26 @@ public class Menu extends AppCompatActivity {
                 }
                 else {
                     Intent intent1 = new Intent(Menu.this,WriteReview.class);
+                    startActivity(intent1);
+                }
+
+            }
+        });
+
+        bt_tourplan = (Button) findViewById(R.id.bt_tourplan);
+
+        bt_tourplan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(FirebaseAuth.getInstance().getCurrentUser() == null)
+                {
+                    Toast.makeText(getApplicationContext(), "You have to log in", Toast.LENGTH_SHORT).show();
+                    Intent intent1 = new Intent(Menu.this,LogIn.class);
+                    startActivity(intent1);
+                }
+                else {
+                    Intent intent1 = new Intent(Menu.this,CreatePlan.class);
                     startActivity(intent1);
                 }
 
