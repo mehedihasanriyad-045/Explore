@@ -60,7 +60,8 @@
         android:textSize="20sp"
         android:textColor="#FFFFFF"
         android:background="#000000"
-        tools:text="Submit" />
+        tools:text="Submit"
+        android:textAllCaps="false"/>
 
 
 </LinearLayout>

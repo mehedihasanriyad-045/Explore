@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Places of Dhaka"
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true" />
+
+
+    <ScrollView android:layout_marginTop="30dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView">
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/bt_lalbagh"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+                android:background="#000000"
+                android:textAllCaps="false"
+                android:text="Lalbagh Port" />
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:background="#FFFFFF"
+                android:textAllCaps="false"
+                android:text="Ahsan Monzil" />
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+                android:background="#000000"
+                android:textAllCaps="false"
+                android:text="Jatiya Sangsad Bhaban" />
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:background="#FFFFFF"
+                android:textAllCaps="false"
+                android:text="Star Mosque" />
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+                android:background="#000000"
+                android:textAllCaps="false"
+                android:text="Bangladesh National Zoo" />
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:background="#FFFFFF"
+                android:textAllCaps="false"
+                android:text="Shahid Minar" />
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+                android:background="#000000"
+                android:textAllCaps="false"
+                android:text="Jatiya Smrity Shoudo" />
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:background="#FFFFFF"
+                android:textAllCaps="false"
+                android:text="Liberation War Museum" />
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+                android:background="#000000"
+                android:textAllCaps="false"
+                android:text="Bahadur Shah Park" />
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:background="#FFFFFF"
+                android:textAllCaps="false"
+                android:text="Ramna Park" />
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+                android:background="#000000"
+                android:textAllCaps="false"
+                android:text="Baldha Garden" />
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:background="#FFFFFF"
+                android:textAllCaps="false"
+                android:text="Hatirjheel" />
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+                android:background="#000000"
+                android:textAllCaps="false"
+                android:text="Botanical Garden" />
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:background="#FFFFFF"
+                android:text="Shishu Park" />
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+                android:background="#000000"
+                android:textAllCaps="false"
+                android:text="Novo Theatre" />
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:background="#FFFFFF"
+                android:textAllCaps="false"
+                android:text="Tajmahal Bangladesh" />
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+                android:background="#000000"
+                android:text="Air Force Museum" />
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:background="#FFFFFF"
+                android:textAllCaps="false"
+                android:text="Khan Md. Mridha Mosque" />
+
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+                android:background="#000000"
+                android:textAllCaps="false"
+                android:text="Fantasy Kingdom" />
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:background="#FFFFFF"
+                android:textAllCaps="false"
+                android:text="Nuhash Palli" />
+
+            <Button
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+                android:background="#000000"
+                android:textAllCaps="false"
+                android:text="Diya Bari" />
+
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+
+</RelativeLayout>
+
+

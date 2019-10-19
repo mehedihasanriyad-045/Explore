@@ -8,7 +8,7 @@
 
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/bt_dhaka"
         android:background="@drawable/buttonshape"
         android:layout_width="104dp"
         android:layout_height="51dp"
