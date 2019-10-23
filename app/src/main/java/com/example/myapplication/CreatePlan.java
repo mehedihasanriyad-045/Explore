@@ -68,6 +68,7 @@ public class CreatePlan extends AppCompatActivity {
 
                 finish();
                 Intent intent = new Intent(getApplicationContext(), LogIn.class);
+                intent.putExtra("prevActivity", "Menu");
                 startActivity(intent);
             }
         }

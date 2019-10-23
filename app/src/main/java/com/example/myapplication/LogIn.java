@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LogIn extends AppCompatActivity implements View.OnClickListener{
 
@@ -107,26 +108,57 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener{
 
         progressBar.setVisibility(View.VISIBLE);
 
-        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-
                 progressBar.setVisibility(View.GONE);
+                if (!task.isSuccessful()) {
+                    //Log.w("TAG", "signInWithEmail:failed", task.getException());
 
-                if(task.isSuccessful())
-                {
-                    finish();
-                    Intent intent = new Intent(getApplicationContext(),Menu.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                } else
-                {
-                    Toast.makeText(getApplicationContext(), "Log In unsuccessful.", Toast.LENGTH_SHORT).show();
+                } else {
+                    checkIfEmailVerified();
                 }
 
             }
         });
 
 
+    }
+
+    private void checkIfEmailVerified() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user.isEmailVerified())
+        {
+            // user is verified, so you can finish this activity or send user to activity which you want.
+            finish();
+            Toast.makeText(getApplicationContext(), "Successfully logged in", Toast.LENGTH_SHORT).show();
+            Intent intent = getIntent();
+            String prevActivity = intent.getStringExtra("prevActivity");
+            if(prevActivity.equals("CreatePlan"))
+            {
+                Intent intent1 = new Intent(getApplicationContext(),CreatePlan.class);
+                startActivity(intent1);
+            }
+            else if(prevActivity.equals("write"))
+            {
+                Intent intent1 = new Intent(getApplicationContext(),WriteReview.class);
+                startActivity(intent1);
+            }
+            else if(prevActivity.equals("Menu"))
+            {
+                Intent intent1 = new Intent(getApplicationContext(),Menu.class);
+                startActivity(intent1);
+            }
+        }
+        else
+        {
+            // email is not verified, so just prompt the message to the user and restart this activity.
+            // NOTE: don't forget to log out the user.
+            FirebaseAuth.getInstance().signOut();
+
+            //restart this activity
+
+        }
     }
 }

@@ -45,6 +45,7 @@ public class Menu extends AppCompatActivity {
                 {
                     Toast.makeText(getApplicationContext(), "You have to log in", Toast.LENGTH_SHORT).show();
                     Intent intent1 = new Intent(Menu.this,LogIn.class);
+                    intent1.putExtra("prevActivity", "write");
                     startActivity(intent1);
                 }
                 else {
@@ -64,7 +65,9 @@ public class Menu extends AppCompatActivity {
                 if(FirebaseAuth.getInstance().getCurrentUser() == null)
                 {
                     Toast.makeText(getApplicationContext(), "You have to log in", Toast.LENGTH_SHORT).show();
+
                     Intent intent1 = new Intent(Menu.this,LogIn.class);
+                    intent1.putExtra("prevActivity", "CreatePlan");
                     startActivity(intent1);
                 }
                 else {
@@ -112,6 +115,7 @@ public class Menu extends AppCompatActivity {
 
                 finish();
                 Intent intent = new Intent(getApplicationContext(), LogIn.class);
+                intent.putExtra("prevActivity", "Menu");
                 startActivity(intent);
             }
         }
