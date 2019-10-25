@@ -51,6 +51,7 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener{
 
         signInSignUptextView.setOnClickListener(this);
         loginButton.setOnClickListener(this);
+        signInforgetpasswordtextView.setOnClickListener(this);
 
     }
 
@@ -66,7 +67,9 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener{
                 Intent intent = new Intent(getApplicationContext(),SignUp.class);
                 startActivity(intent);
                 break;
-
+            case R.id.signInforgetPasswordtextviewid:
+                Intent intent1 = new Intent(getApplicationContext(), ForgetPassword.class);
+                startActivity(intent1);
         }
 
     }
@@ -108,57 +111,51 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener{
 
         progressBar.setVisibility(View.VISIBLE);
 
-        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
-                if (!task.isSuccessful()) {
-                    //Log.w("TAG", "signInWithEmail:failed", task.getException());
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if(task.isSuccessful())
+                {
+                    if(user.isEmailVerified())
+                    {
+                        // user is verified, so you can finish this activity or send user to activity which you want.
+                        finish();
+                        Toast.makeText(getApplicationContext(), "Successfully logged in", Toast.LENGTH_SHORT).show();
+                        Intent intent = getIntent();
+                        String prevActivity = intent.getStringExtra("prevActivity");
+                        if(prevActivity.equals("CreatePlan"))
+                        {
+                            Intent intent1 = new Intent(getApplicationContext(),CreatePlan.class);
+                            startActivity(intent1);
+                        }
+                        else if(prevActivity.equals("write"))
+                        {
+                            Intent intent1 = new Intent(getApplicationContext(),WriteReview.class);
+                            startActivity(intent1);
+                        }
+                        else if(prevActivity.equals("Menu"))
+                        {
+                            Intent intent1 = new Intent(getApplicationContext(),Menu.class);
+                            startActivity(intent1);
+                        }
+                    }
+                    else if(!user.isEmailVerified())
+                    {
+                        Toast.makeText(getApplicationContext(),"Please verify your email first & then try again.",Toast.LENGTH_SHORT).show();
 
-                } else {
-                    checkIfEmailVerified();
+                    }
+
                 }
-
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"Log In is not succesfull",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
 
     }
 
-    private void checkIfEmailVerified() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        if (user.isEmailVerified())
-        {
-            // user is verified, so you can finish this activity or send user to activity which you want.
-            finish();
-            Toast.makeText(getApplicationContext(), "Successfully logged in", Toast.LENGTH_SHORT).show();
-            Intent intent = getIntent();
-            String prevActivity = intent.getStringExtra("prevActivity");
-            if(prevActivity.equals("CreatePlan"))
-            {
-                Intent intent1 = new Intent(getApplicationContext(),CreatePlan.class);
-                startActivity(intent1);
-            }
-            else if(prevActivity.equals("write"))
-            {
-                Intent intent1 = new Intent(getApplicationContext(),WriteReview.class);
-                startActivity(intent1);
-            }
-            else if(prevActivity.equals("Menu"))
-            {
-                Intent intent1 = new Intent(getApplicationContext(),Menu.class);
-                startActivity(intent1);
-            }
-        }
-        else
-        {
-            // email is not verified, so just prompt the message to the user and restart this activity.
-            // NOTE: don't forget to log out the user.
-            FirebaseAuth.getInstance().signOut();
-
-            //restart this activity
-
-        }
-    }
 }

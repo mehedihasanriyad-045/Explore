@@ -24,7 +24,7 @@ public class CreatePlan extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_plan);
-        createPlanButton=(Button)findViewById(R.id.createPlanButton);
+        createPlanButton = findViewById(R.id.createPlanButton);
         createPlanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

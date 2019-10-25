@@ -24,7 +24,7 @@ public class CreatePlanDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_plan_details);
-        tourDateField=(EditText)findViewById(R.id.tourDateField);
+        tourDateField = findViewById(R.id.tourDateField);
         Calendar calendar=Calendar.getInstance();
         final int year=calendar.get(Calendar.YEAR);
         final int month=calendar.get(Calendar.MONTH);

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Menu extends AppCompatActivity {
 
@@ -24,8 +25,7 @@ public class Menu extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-
-        bt_review = (Button) findViewById(R.id.bt_Review);
+        bt_review =  findViewById(R.id.bt_Review);
 
         bt_review.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,7 +35,7 @@ public class Menu extends AppCompatActivity {
             }
         });
 
-        bt_writereview = (Button) findViewById(R.id.bt_wtitereview);
+        bt_writereview =  findViewById(R.id.bt_wtitereview);
 
         bt_writereview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,16 +56,17 @@ public class Menu extends AppCompatActivity {
             }
         });
 
-        bt_tourplan = (Button) findViewById(R.id.bt_tourplan);
+        bt_tourplan =  findViewById(R.id.bt_tourplan);
 
         bt_tourplan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(FirebaseAuth.getInstance().getCurrentUser() == null)
+                finish();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if(FirebaseAuth.getInstance().getCurrentUser() == null || user.isEmailVerified() )
                 {
                     Toast.makeText(getApplicationContext(), "You have to log in", Toast.LENGTH_SHORT).show();
-
                     Intent intent1 = new Intent(Menu.this,LogIn.class);
                     intent1.putExtra("prevActivity", "CreatePlan");
                     startActivity(intent1);
@@ -77,7 +78,6 @@ public class Menu extends AppCompatActivity {
 
             }
         });
-
 
     }
 
