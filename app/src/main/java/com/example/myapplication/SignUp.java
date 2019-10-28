@@ -20,29 +20,26 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener{
-
     private EditText signUpnameId, signUpemailId, signUppasswordId;
     private Button signup_btn;
     private TextView signUpSignIn;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
-
-
-
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
         this.setTitle("Sign Up Here");
-
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-
         progressBar =  findViewById(R.id.progressbarId);
         signUpnameId =  findViewById(R.id.signUpnameId);
         signUpemailId =  findViewById(R.id.signUpemailId);
@@ -50,9 +47,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
         signUpSignIn =  findViewById(R.id.signUpSignIn);
         signUppasswordId =  findViewById(R.id.signUppasswordId);
 
-
         signUpSignIn.setOnClickListener(this);
         signup_btn.setOnClickListener(this);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("Profile");
+
 
 
 
@@ -63,6 +62,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.signup_btn:
+                saveData();
                 userRegister();
                 break;
 
@@ -70,16 +70,18 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
                 Intent intent = new Intent(getApplicationContext(),LogIn.class);
                 startActivity(intent);
                 break;
-
         }
 
     }
+
+
 
     private void userRegister() {
 
         String name =  signUpnameId.getText().toString();
         String email =  signUpemailId.getText().toString().trim();
         String password =  signUppasswordId.getText().toString().trim();
+        //databaseReference = FirebaseDatabase.getInstance().getReference("Ok");
 
         if(email.isEmpty())
         {
@@ -126,6 +128,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
                 progressBar.setVisibility(View.GONE);
                 if(task.isSuccessful())
                 {
+
                     finish();
                     mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -159,8 +162,21 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
 
                     }
                 }
+
+
             }
         });
+    }
+
+    private void saveData(){
+        String name = signUpnameId.getText().toString().trim();
+        String email = signUpemailId.getText().toString().trim();
+        String key = databaseReference.push().getKey();
+
+        Profile profile = new Profile(name, email);
+
+        databaseReference.child(key).setValue(profile);
+        Toast.makeText(getApplicationContext(), "Profile Added", Toast.LENGTH_LONG).show();
 
     }
 }

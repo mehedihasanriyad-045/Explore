@@ -112,11 +112,24 @@ public class Menu extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "You are already logged in.", Toast.LENGTH_SHORT).show();
             }
             else {
-
                 finish();
                 Intent intent = new Intent(getApplicationContext(), LogIn.class);
                 intent.putExtra("prevActivity", "Menu");
                 startActivity(intent);
+            }
+        }
+
+        if(item.getItemId() == R.id.ProfileMenuId)
+        {
+            if(FirebaseAuth.getInstance().getCurrentUser() != null)
+            {
+                finish();
+                Intent intent = new Intent(getApplicationContext(), viewProfileActivity.class);
+                intent.putExtra("prevActivity", "Menu");
+                startActivity(intent);
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "LogIn First", Toast.LENGTH_LONG).show();
             }
         }
 
