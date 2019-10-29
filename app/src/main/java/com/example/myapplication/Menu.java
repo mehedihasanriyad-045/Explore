@@ -62,9 +62,9 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                finish();
+
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if(FirebaseAuth.getInstance().getCurrentUser() == null || user.isEmailVerified() )
+                if(FirebaseAuth.getInstance().getCurrentUser() == null )
                 {
                     Toast.makeText(getApplicationContext(), "You have to log in", Toast.LENGTH_SHORT).show();
                     Intent intent1 = new Intent(Menu.this,LogIn.class);
@@ -99,7 +99,7 @@ public class Menu extends AppCompatActivity {
             }
             else {
                 FirebaseAuth.getInstance().signOut();
-                finish();
+
                 Intent intent = new Intent(getApplicationContext(), Menu.class);
                 startActivity(intent);
             }
@@ -113,11 +113,14 @@ public class Menu extends AppCompatActivity {
             }
             else {
 
-                finish();
                 Intent intent = new Intent(getApplicationContext(), LogIn.class);
                 intent.putExtra("prevActivity", "Menu");
                 startActivity(intent);
             }
+        }
+        if(item.getItemId() == R.id.ProfileMenuId){
+            Intent intent = new Intent(getApplicationContext(), Profile.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

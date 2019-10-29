@@ -7,7 +7,8 @@
     android:gravity="center"
     android:orientation="vertical"
     android:weightSum="15555"
-    tools:context=".Menu">
+    tools:context=".Menu"
+    android:background="#FFFFFF">
 
 
     <ImageView
@@ -61,4 +62,11 @@
         android:text="@string/Find"
         android:background="@drawable/buttonshape"
         android:textColor="#FFFFFF"/>
+
+    <ProgressBar
+        android:id="@+id/progressbarmenuId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
 </LinearLayout>

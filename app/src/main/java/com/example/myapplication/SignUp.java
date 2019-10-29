@@ -1,35 +1,74 @@
 package com.example.myapplication;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
+import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+
+import android.provider.MediaStore;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText signUpnameId, signUpemailId, signUppasswordId;
+    private EditText signUpnameId, signUpemailId, signUppasswordId,signUpPhoneId;
     private Button signup_btn;
     private TextView signUpSignIn;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
+    private ImageView signUpimageView;
 
+    private static final String IMAGE_DIRECTORY = "/demonuts";
+    private int GALLERY = 1, CAMERA = 2;
+    private DatabaseReference mDatabase;
 
+    private Uri imageUri;
+    private String imageurl;
+
+    private static final int IMAGE_REQUEST = 1;
+
+    private StorageReference storageReference,imagename;
+    private StorageTask uploadTask;
 
 
     @Override
@@ -38,7 +77,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_sign_up);
 
         this.setTitle("Sign Up Here");
-
+        
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -49,10 +88,17 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
         signup_btn =  findViewById(R.id.signup_btn);
         signUpSignIn =  findViewById(R.id.signUpSignIn);
         signUppasswordId =  findViewById(R.id.signUppasswordId);
+        signUpimageView =findViewById(R.id.signUpImageId);
+        signUpPhoneId = findViewById(R.id.signUpphoneId);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference("Users");
+        storageReference = FirebaseStorage.getInstance().getReference("usersImage");
 
 
         signUpSignIn.setOnClickListener(this);
         signup_btn.setOnClickListener(this);
+        signUpimageView.setOnClickListener(this);
+
 
 
 
@@ -71,15 +117,82 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
                 startActivity(intent);
                 break;
 
+            case R.id.signUpImageId:
+                if(uploadTask != null && uploadTask.isInProgress())
+                {
+                    Toast.makeText(getApplicationContext(),"Upload in process.",Toast.LENGTH_SHORT).show();
+                }else {
+                    showPictureDialog();
+                }
+
         }
 
     }
 
+
+    private void showPictureDialog(){
+        AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
+        pictureDialog.setTitle("Select Action");
+        String[] pictureDialogItems = {
+                "Select photo from gallery" };
+        pictureDialog.setItems(pictureDialogItems,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                choosePhotoFromGallary();
+                                break;
+
+                        }
+                    }
+                });
+        pictureDialog.show();
+    }
+
+
+    public void choosePhotoFromGallary() {
+        Intent galleryIntent = new Intent();
+        galleryIntent.setType("image/*");
+        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(galleryIntent, GALLERY);
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == this.RESULT_CANCELED) {
+            return;
+        }
+        if (requestCode == GALLERY && data != null && data.getData() != null ) {
+            imageUri = data.getData();
+            try {
+                Picasso.get().load(imageUri).into(signUpimageView);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(), "Failed!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private String getFileExtension(Uri uri){
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
+
     private void userRegister() {
 
-        String name =  signUpnameId.getText().toString();
-        String email =  signUpemailId.getText().toString().trim();
-        String password =  signUppasswordId.getText().toString().trim();
+        final String name =  signUpnameId.getText().toString();
+        final String email =  signUpemailId.getText().toString().trim();
+        final String password = signUppasswordId.getText().toString().trim();
+        final String phoneNum = signUpPhoneId.getText().toString();
+
+
 
         if(email.isEmpty())
         {
@@ -117,6 +230,12 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
             signUpnameId.requestFocus();
             return;
         }
+        if(imageUri == null)
+        {
+            signUpSignIn.setError("Please select an image first");
+
+        }
+
 
         progressBar.setVisibility(View.VISIBLE);
 
@@ -126,16 +245,43 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
                 progressBar.setVisibility(View.GONE);
                 if(task.isSuccessful())
                 {
-                    finish();
                     mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+
+
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful())
                             {
-                                Intent intent = new Intent(getApplicationContext(),LogIn.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intent);
-                                Toast.makeText(getApplicationContext(),"Registered is succesfull. Please verify.",Toast.LENGTH_SHORT).show();
+                                final StorageReference Imagename = storageReference.child("image"+imageUri.getLastPathSegment());
+                                imageurl = imageUri.toString();
+                                Imagename.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        Imagename.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                            @Override
+                                            public void onSuccess(Uri uri) {
+                                                DatabaseReference imagestore  = FirebaseDatabase.getInstance().getReference().child("Image");
+                                                UserInfo userInfo = new UserInfo(name,email,phoneNum,String.valueOf(uri));
+                                                String uploadId = mDatabase.push().getKey();
+                                                HashMap<String, UserInfo> hashMap = new HashMap<>();
+                                                hashMap.put(uploadId,userInfo);
+                                                imagestore.setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Toast.makeText(getApplicationContext(),"Finally",Toast.LENGTH_LONG).show();
+                                                    }
+                                                });
+                                                /*DatabaseReference usersRef = mDatabase.child("users");
+                                                UserInfo userInfo = new UserInfo(name,email,phoneNum,imageurl);
+                                                String uploadId = mDatabase.push().getKey();
+                                                mDatabase.child(uploadId).setValue(userInfo);*/
+                                                Toast.makeText(getApplicationContext(),"Registered is succesfull. Please verify.",Toast.LENGTH_SHORT).show();
+
+                                            }
+                                        });
+                                    }
+                                });
+
                             }
                             else
                             {
