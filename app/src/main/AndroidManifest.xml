@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddPlaces"></activity>
+        <activity android:name=".ReviewDetails"></activity>
+        <activity android:name=".AddPlaces" />
         <activity android:name=".Profile" />
         <activity android:name=".ForgetPassword" />
         <activity android:name=".SignUp" />

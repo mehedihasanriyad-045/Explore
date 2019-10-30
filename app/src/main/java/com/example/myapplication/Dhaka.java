@@ -20,12 +20,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -40,6 +43,8 @@ public class Dhaka extends AppCompatActivity {
     private List<PlacesDesc>placesDescList;
     DatabaseReference databaseReference;
     private ProgressBar progressBar;
+    private FirebaseStorage firebaseStorage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +56,8 @@ public class Dhaka extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progress);
 
+        firebaseStorage = FirebaseStorage.getInstance();
+
         databaseReference = FirebaseDatabase.getInstance().getReference("Places: ");
 
 
@@ -61,15 +68,41 @@ public class Dhaka extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                progressBar.setVisibility(View.VISIBLE);
+                placesDescList.clear();
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren())
                 {
                     PlacesDesc placesDesc = dataSnapshot1.getValue(PlacesDesc.class);
+                    placesDesc.setKey(dataSnapshot1.getKey());
                     placesDescList.add(placesDesc);
                 }
 
                 myAdpater  = new MyAdpater(getApplicationContext(),placesDescList);
                 recyclerView.setAdapter(myAdpater);
+                myAdpater.setOnItemClickListener(new MyAdpater.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        String text = placesDescList.get(position).getImagename();
+                        Toast.makeText(getApplicationContext(),text+"is selectec"+position,Toast.LENGTH_SHORT).show();
+                    }
 
+
+                    @Override
+                    public void DELETE(int position) {
+                        PlacesDesc selectedItem = placesDescList.get(position);
+                        final String key = selectedItem.getKey();
+
+                        StorageReference storageReference = firebaseStorage.getReferenceFromUrl(selectedItem.getImageurl());
+                        storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+
+                                databaseReference.child(key).removeValue();
+
+                            }
+                        });
+                    }
+                });
                 progressBar.setVisibility(View.INVISIBLE);
             }
 

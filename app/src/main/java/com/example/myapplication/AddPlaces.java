@@ -15,6 +15,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +57,7 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
     // Creating StorageReference and DatabaseReference object.
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
+    private ProgressBar progressBarAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,7 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
         addplacesedit = findViewById(R.id.addplacesedit);
         addplacesimg = findViewById(R.id.addplaceimg);
         addplacesname = findViewById(R.id.addplacesname);
+        progressBarAdd = findViewById(R.id.progressbarAdd);
         mDatabase = FirebaseDatabase.getInstance().getReference("Places: ");
         mStorage = FirebaseStorage.getInstance();
         mStorageref = mStorage.getReference();
@@ -89,6 +92,7 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
             {
                 Toast.makeText(getApplicationContext(),"Upload in progress.",Toast.LENGTH_SHORT).show();
             } else {
+
                 UploadImageFileToFirebaseStorage();
             }
         }
@@ -150,7 +154,7 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
     private void UploadImageFileToFirebaseStorage() {
         final String imagename = addplacesname.getText().toString().trim();
         final String placesdetails = addplacesedit.getText().toString();
-
+        progressBarAdd.setVisibility(View.VISIBLE);
         if(imagename.isEmpty()){
             addplacesname.setError("Enter the image name.");
             addplacesname.requestFocus();
@@ -168,14 +172,16 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
             return;
         }
 
+
         StorageReference ref = storageReference.child(System.currentTimeMillis()+"."+GetFileExtension(FilePathUri));
 
         ref.putFile(FilePathUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Toast.makeText(getApplicationContext(),"Place added Done!",Toast.LENGTH_SHORT).show();
 
+                        progressBarAdd.setVisibility(View.GONE);
+                        Toast.makeText(getApplicationContext(),"Place added Done!",Toast.LENGTH_SHORT).show();
                         Task<Uri> uriTask = taskSnapshot.getMetadata().getReference().getDownloadUrl();
                         while(!uriTask.isSuccessful());
                         Uri downlodur = uriTask.getResult();
@@ -191,6 +197,8 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
                         // ...
                     }
                 });
+
+
 
     }
 }
