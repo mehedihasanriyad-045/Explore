@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -77,7 +78,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_sign_up);
 
         this.setTitle("Sign Up Here");
-        
+
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -254,33 +255,27 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
                             {
                                 final StorageReference Imagename = storageReference.child("image"+imageUri.getLastPathSegment());
                                 imageurl = imageUri.toString();
-                                Imagename.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                    @Override
-                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                        Imagename.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                Imagename.putFile(imageUri)
+                                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                             @Override
-                                            public void onSuccess(Uri uri) {
-                                                DatabaseReference imagestore  = FirebaseDatabase.getInstance().getReference().child("Image");
-                                                UserInfo userInfo = new UserInfo(name,email,phoneNum,String.valueOf(uri));
+                                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                Toast.makeText(getApplicationContext(),"Place added Done!",Toast.LENGTH_SHORT).show();
+                                                Task<Uri> uriTask = taskSnapshot.getMetadata().getReference().getDownloadUrl();
+                                                while(!uriTask.isSuccessful());
+                                                Uri downloadUrl = uriTask.getResult();
+                                                UserInfo userInfo = new UserInfo(name,email,phoneNum,downloadUrl.toString());
                                                 String uploadId = mDatabase.push().getKey();
-                                                HashMap<String, UserInfo> hashMap = new HashMap<>();
-                                                hashMap.put(uploadId,userInfo);
-                                                imagestore.setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void aVoid) {
-                                                        Toast.makeText(getApplicationContext(),"Finally",Toast.LENGTH_LONG).show();
-                                                    }
-                                                });
-                                                /*DatabaseReference usersRef = mDatabase.child("users");
-                                                UserInfo userInfo = new UserInfo(name,email,phoneNum,imageurl);
-                                                String uploadId = mDatabase.push().getKey();
-                                                mDatabase.child(uploadId).setValue(userInfo);*/
-                                                Toast.makeText(getApplicationContext(),"Registered is succesfull. Please verify.",Toast.LENGTH_SHORT).show();
+                                                mDatabase.child(uploadId).setValue(userInfo);
 
                                             }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception exception) {
+                                                // Handle unsuccessful uploads
+                                                // ...
+                                            }
                                         });
-                                    }
-                                });
 
                             }
                             else

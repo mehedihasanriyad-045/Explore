@@ -1,47 +1,96 @@
 package com.example.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Dhaka extends AppCompatActivity {
 
-    private Button bt_lalbagh;
-    FirebaseAuth mAuth;
+    private Button dhaka;
+    private RecyclerView recyclerView;
 
+    private MyAdpater myAdpater;
+    private List<PlacesDesc>placesDescList;
+    DatabaseReference databaseReference;
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dhaka);
         this.setTitle("DHAKA");
+        recyclerView = findViewById(R.id.dhakaRecycle);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mAuth = FirebaseAuth.getInstance();
+        progressBar = findViewById(R.id.progress);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("Places: ");
 
 
 
-        bt_lalbagh = (Button) findViewById(R.id.bt_lalbagh);
+        placesDescList = new ArrayList<>();
 
-        bt_lalbagh.setOnClickListener(new View.OnClickListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren())
+                {
+                    PlacesDesc placesDesc = dataSnapshot1.getValue(PlacesDesc.class);
+                    placesDescList.add(placesDesc);
+                }
+
+                myAdpater  = new MyAdpater(getApplicationContext(),placesDescList);
+                recyclerView.setAdapter(myAdpater);
+
+                progressBar.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                progressBar.setVisibility(View.INVISIBLE);
+                Toast.makeText(getApplicationContext(),"Error: "+databaseError.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dhaka = (Button) findViewById(R.id.dhakaaddplaces);
+
+        dhaka.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Dhaka.this, Lalbagh.class);
+                Intent intent = new Intent(getApplicationContext(), AddPlaces.class);
                 startActivity(intent);
             }
         });
 
     }
-
-
-
-
 
 
     @Override
