@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Menu extends AppCompatActivity {
 
-    private Button bt_review , bt_writereview, bt_tourplan;
+    private Button bt_review , bt_writereview, bt_tourplan,bt;
     FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +76,16 @@ public class Menu extends AppCompatActivity {
                     startActivity(intent1);
                 }
 
+            }
+        });
+
+
+        bt= findViewById(R.id.bt_Find);
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Menu.this, ContactList.class);
+                startActivity(intent);
             }
         });
 
