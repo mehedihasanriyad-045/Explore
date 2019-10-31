@@ -37,76 +37,40 @@
         android:orientation="vertical"
         android:layout_gravity="center"
         android:layout_marginTop="45dp"
-        android:paddingTop="70dp">
+        android:paddingTop="70dp"
+        android:weightSum="5"
+        android:gravity="center">
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:textColor="#000000"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            android:text="Welcome,"
+            android:gravity="center"/>
 
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="100dp"
-                android:id="@+id/profileImageView"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/profile"/>
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:id="@+id/profilenameview"
+            android:textSize="30sp"
+            android:textColor="#000000"
+            android:gravity="center"/>
 
-        </LinearLayout>
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:id="@+id/profileemailview"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="#000000"/>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:paddingStart="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/ic_person_black_24dp"/>
-            <TextView
-                android:textStyle="bold"
-                android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="20dp"
-                android:id="@+id/profilenameview"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:paddingStart="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/ic_email_black_24dp"/>
-            <TextView
-                android:textStyle="bold"
-                android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="20dp"
-                android:id="@+id/profileemailview"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:paddingStart="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/ic_phone_black_24dp"/>
-            <TextView
-                android:textStyle="bold"
-                android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="20dp"
-                android:id="@+id/profilephoneview"
-               />
-        </LinearLayout>
+
 
 
     </LinearLayout>

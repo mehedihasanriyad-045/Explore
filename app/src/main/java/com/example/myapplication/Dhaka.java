@@ -83,7 +83,7 @@ public class Dhaka extends AppCompatActivity {
                     @Override
                     public void onItemClick(int position) {
                         String text = placesDescList.get(position).getImagename();
-                        Toast.makeText(getApplicationContext(),text+"is selectec"+position,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),text+" is selectecd "+position,Toast.LENGTH_SHORT).show();
                     }
 
 
