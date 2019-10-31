@@ -4,13 +4,13 @@ import android.net.Uri;
 
 public class UserInfo{
 
-    String name,email,phoneNum,imageurl;
+    String name,email,phoneNum;
 
-    public UserInfo(String name, String email, String phoneNum, String imageurl) {
+    public UserInfo(String name, String email, String phoneNum) {
         this.name = name;
         this.email = email;
         this.phoneNum = phoneNum;
-        this.imageurl = imageurl;
+
     }
 
     public UserInfo(String name, String email, String phoneNum, Uri uri) {
@@ -40,11 +40,4 @@ public class UserInfo{
         this.phoneNum = phoneNum;
     }
 
-    public String getImageurl() {
-        return imageurl;
-    }
-
-    public void setImageurl(String imageurl) {
-        this.imageurl = imageurl;
-    }
 }

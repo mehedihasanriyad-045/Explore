@@ -29,14 +29,16 @@ import com.squareup.picasso.Picasso;
 
 public class Profile extends AppCompatActivity implements View.OnClickListener {
 
-   private ImageView profileImageview;
-   private TextView profilenameview,profileemailview, profilephoneview;
-   private Button profilesignoutbtn;
-   private FirebaseUser firebaseUser;
-   private FirebaseAuth mAuth;
-   private FirebaseDatabase firebaseDatabase;
 
-   private ProgressBar progressBar;
+    private ImageView profileImageview;
+    private TextView profilenameview,profileemailview;
+    private Button profilesignoutbtn;
+    private FirebaseUser firebaseUser;
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase firebaseDatabase;
+
+    private ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,36 +49,34 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         mAuth = FirebaseAuth.getInstance();
         final FirebaseUser user = mAuth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        profileImageview = findViewById(R.id.profileImageView);
         profileemailview = findViewById(R.id.profileemailview);
         profilenameview = findViewById(R.id.profilenameview);
-        profilephoneview = findViewById(R.id.profilephoneview);
         progressBar = findViewById(R.id.progressbarproId);
         profilesignoutbtn = findViewById(R.id.profilesignout_btn);
         profilesignoutbtn.setOnClickListener(this);
 
         // Initialize Firebase Auth
-       DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Image");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Image");
         mAuth = FirebaseAuth.getInstance();
         String userKey = user.getUid();
 
 
         databaseReference.child("Profile");
         databaseReference.child(userKey);
+        progressBar.setVisibility(View.VISIBLE);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String userName = dataSnapshot.child("users").getValue(String.class);
                 profilenameview.setText(user.getDisplayName());
                 profileemailview.setText(user.getEmail());
-                Picasso.get().load(user.getPhotoUrl()).into(profileImageview);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override

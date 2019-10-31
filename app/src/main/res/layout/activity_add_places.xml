@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddPlaces"
+    android:background="#FFFFFF">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/icon"
+                android:layout_marginStart="150dp"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Image : "
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="20dp"
+                android:textStyle="bold"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:id="@+id/addplaceimg"
+                android:src="@drawable/addplace"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Write Details : "
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="20dp"
+                android:textStyle="bold"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textStyle="italic"
+                android:textSize="15sp"
+                android:inputType="text"
+                android:paddingTop="10dp"
+                android:id="@+id/addplacesname"
+                android:hint="Places Name:"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textStyle="italic"
+                android:textSize="15sp"
+                android:inputType="textMultiLine"
+                android:paddingTop="50dp"
+                android:id="@+id/addplacesedit"
+                android:hint="Places Details: "/>
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Add"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/buttonshape"
+                android:id="@+id/addplacesbtn"/>
+            <ProgressBar
+                android:id="@+id/progressbarAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
