@@ -81,9 +81,17 @@ public class Dhaka extends AppCompatActivity {
                 recyclerView.setAdapter(myAdpater);
                 myAdpater.setOnItemClickListener(new MyAdpater.OnItemClickListener() {
                     @Override
-                    public void onItemClick(int position) {
-                        String text = placesDescList.get(position).getImagename();
-                        Toast.makeText(getApplicationContext(),text+" is selectecd "+position,Toast.LENGTH_SHORT).show();
+                    public void onItemClick( View v, int position) {
+
+                        String imageName = placesDescList.get(position).getImagename();
+                        String desc = placesDescList.get(position).getPlacesdesc();
+                        String imageurl = placesDescList.get(position).getImageurl();
+                        Intent intent = new Intent(getApplicationContext(),Details.class);
+                        intent.putExtra("PlaceName",imageName);
+                        intent.putExtra("Description", desc);
+                        intent.putExtra("URL", imageurl);
+                        startActivity(intent);
+                        //Toast.makeText(getApplicationContext(),desc+"  "+position,Toast.LENGTH_SHORT).show();
                     }
 
 

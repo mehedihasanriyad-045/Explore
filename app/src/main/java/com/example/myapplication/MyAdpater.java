@@ -74,7 +74,7 @@ public class MyAdpater extends RecyclerView.Adapter<MyAdpater.MyViewHolder>
 
                 if(position !=  RecyclerView.NO_POSITION)
                 {
-                    listener.onItemClick(position);
+                    listener.onItemClick(v, position);
                 }
             }
         }
@@ -112,7 +112,7 @@ public class MyAdpater extends RecyclerView.Adapter<MyAdpater.MyViewHolder>
 
     public interface OnItemClickListener {
 
-        void onItemClick(int position);
+        void onItemClick(View v , int position);
 
         void DELETE(int position);
 

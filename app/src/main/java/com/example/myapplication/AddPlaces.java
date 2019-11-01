@@ -128,7 +128,8 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
                 // Getting selected image into Bitmap.
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), FilePathUri);
 
-                Picasso.get().load(FilePathUri).into(addplacesimg);
+                //Picasso.get().load(FilePathUri).into(addplacesimg);
+                Picasso.get().load(String.valueOf(FilePathUri)).into(addplacesimg);
 
 
             }
