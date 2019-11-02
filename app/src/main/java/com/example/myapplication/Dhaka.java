@@ -44,6 +44,7 @@ public class Dhaka extends AppCompatActivity {
     DatabaseReference databaseReference;
     private ProgressBar progressBar;
     private FirebaseStorage firebaseStorage;
+    private String key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,21 +78,26 @@ public class Dhaka extends AppCompatActivity {
                     placesDescList.add(placesDesc);
                 }
 
+
                 myAdpater  = new MyAdpater(getApplicationContext(),placesDescList);
                 recyclerView.setAdapter(myAdpater);
                 myAdpater.setOnItemClickListener(new MyAdpater.OnItemClickListener() {
                     @Override
                     public void onItemClick( View v, int position) {
 
+
                         String imageName = placesDescList.get(position).getImagename();
                         String desc = placesDescList.get(position).getPlacesdesc();
                         String imageurl = placesDescList.get(position).getImageurl();
+                        String key1 = placesDescList.get(position).getKey();
                         Intent intent = new Intent(getApplicationContext(),Details.class);
                         intent.putExtra("PlaceName",imageName);
                         intent.putExtra("Description", desc);
                         intent.putExtra("URL", imageurl);
+                        intent.putExtra("Div","Dhaka: ");
+                        intent.putExtra("Key",key1);
                         startActivity(intent);
-                        //Toast.makeText(getApplicationContext(),desc+"  "+position,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),key1,Toast.LENGTH_SHORT).show();
                     }
 
 

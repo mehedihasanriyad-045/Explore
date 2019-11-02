@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,18 +13,27 @@
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="350dp"
                     android:id="@+id/detailsImage"
                     android:src="@drawable/loading"/>
+
+                <View
+                    android:background="#2e2e2e"
+                    android:id="@+id/detview1"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"/>
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/detailsName"
@@ -34,7 +43,13 @@
                     android:textSize="40sp"
                     android:textColor="#16471F"
                     android:text="Place's name is loading. Please wait."
-                    android:textStyle="normal"/>
+                    android:textStyle="bold"/>
+
+                <View
+                    android:background="#2e2e2e"
+                    android:id="@+id/detview2"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"/>
 
 
             </LinearLayout>
@@ -55,14 +70,62 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/post_detail_user_img"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/icon"/>
+
+                <EditText
+
+                    android:hint="Write Comment"
+                    android:background="@drawable/edittext"
+                    android:id="@+id/post_detail_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:ems="10"
+                    android:inputType="textMultiLine"/>
+
+                <Button
+                    android:id="@+id/post_detail_add_comment_btn"
+                    android:layout_width="63dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/edittext"
+                    android:text="Add" />
+
+
+            </LinearLayout>
+
             <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 android:id="@+id/progressbardet"/>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rec_comment"
+                android:layout_marginTop="0dp">
+
+
+            </androidx.recyclerview.widget.RecyclerView>
+
         </LinearLayout>
 
 
 
-</ScrollView>
+
+</androidx.core.widget.NestedScrollView>

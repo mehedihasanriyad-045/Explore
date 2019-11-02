@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:scaleType="centerCrop"
-            android:id="@+id/place_images"/>
+            android:id="@+id/place_images"
+            android:src="@drawable/loading"/>
 
         <View
             android:layout_width="match_parent"
