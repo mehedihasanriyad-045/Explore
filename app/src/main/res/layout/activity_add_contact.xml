@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".MainActivity"
+    android:background="#FFFFFF">
+
+    <ImageView
+        app:srcCompat="@drawable/icon"
+        android:layout_marginBottom="20dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        />
+    <EditText
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:hint="Enter the name"
+        android:drawableLeft="@drawable/ic_name"
+        android:textColor="#000000"
+        android:id="@+id/addName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@android:color/black"
+        android:textColorHighlight="@color/colorPrimaryDark"/>
+
+    <EditText
+        android:inputType="phone"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:hint="Phonen umber"
+        android:drawableLeft="@drawable/ic_phone_black_24dp"
+        android:textColor="#000000"
+        android:id="@+id/addPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/addContacts"
+        android:layout_width="127dp"
+        android:layout_height="40dp"
+        android:background="@drawable/buttonshape"
+        android:text="Add number"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp" />
+
+    <ProgressBar
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:id="@+id/progressbarcontacts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

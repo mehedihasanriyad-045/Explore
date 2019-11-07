@@ -18,14 +18,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ReviewDetails"></activity>
+        <activity android:name=".AddContact"></activity>
+        <activity android:name=".ReviewDetails" />
         <activity android:name=".AddPlaces" />
         <activity android:name=".Profile" />
         <activity android:name=".ForgetPassword" />
         <activity android:name=".SignUp" />
         <activity android:name=".LogIn" />
         <activity android:name=".WriteReview" />
-        <activity android:name=".Lalbagh" />
         <activity android:name=".CreatePlan" />
         <activity android:name=".CreatePlanDetails" />
         <activity android:name=".Review" />
@@ -34,7 +34,6 @@
         <activity android:name=".Dhaka" />
         <activity android:name=".ContactList" />
         <activity android:name=".MainActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
