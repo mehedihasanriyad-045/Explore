@@ -8,11 +8,13 @@
     tools:context=".ContactList">
 
     <ListView
+
         android:id="@+id/contactview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:listSelector="#aa44"
         android:divider="#000000"
-        android:dividerHeight="2dp">
+        android:dividerHeight="4dp">
 
     </ListView>
 

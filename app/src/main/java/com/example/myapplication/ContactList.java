@@ -7,14 +7,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +34,31 @@ public class ContactList extends AppCompatActivity {
         setContentView(R.layout.activity_contact_list);
 
         listView = findViewById(R.id.contactview);
+
         databaseReference = FirebaseDatabase.getInstance().getReference("Contacts");
 
         contactsList = new ArrayList<>();
 
         contactAdapter = new contactAdapter(ContactList.this,contactsList);
+        listView.setAdapter(contactAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String number = contactsList.get(position).getPhone();
+
+                Intent intent= new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
+                startActivity(intent);
+
+            }
+
+
+
+        });
+
+
+
+
 
         addContacts= findViewById(R.id.addContacts);
         addContacts.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +68,9 @@ public class ContactList extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
     }
 
     @Override
