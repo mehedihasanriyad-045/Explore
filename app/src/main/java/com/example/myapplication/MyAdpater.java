@@ -43,7 +43,7 @@ public class MyAdpater extends RecyclerView.Adapter<MyAdpater.MyViewHolder>
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         PlacesDesc placesDesc = placesDescList.get(position);
-        holder.placesname.setText(placesDesc.getImagename()+":");
+        holder.placesname.setText(placesDesc.getImagename());
         Picasso.get().load(placesDesc.getImageurl()).fit().centerCrop().into(holder.imageView);
 
 

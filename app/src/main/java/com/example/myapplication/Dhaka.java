@@ -44,13 +44,15 @@ public class Dhaka extends AppCompatActivity {
     DatabaseReference databaseReference;
     private ProgressBar progressBar;
     private FirebaseStorage firebaseStorage;
-    private String key;
+    private String key,div;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dhaka);
-        this.setTitle("DHAKA");
+        div = getIntent().getStringExtra("div");
+
+        this.setTitle(div);
         recyclerView = findViewById(R.id.dhakaRecycle);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -59,7 +61,7 @@ public class Dhaka extends AppCompatActivity {
 
         firebaseStorage = FirebaseStorage.getInstance();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Places: ");
+        databaseReference = FirebaseDatabase.getInstance().getReference(div+"-Places:");
 
 
 
@@ -94,7 +96,7 @@ public class Dhaka extends AppCompatActivity {
                         intent.putExtra("PlaceName",imageName);
                         intent.putExtra("Description", desc);
                         intent.putExtra("URL", imageurl);
-                        intent.putExtra("Div","Dhaka: ");
+                        intent.putExtra("Div",div+" ");
                         intent.putExtra("Key",key1);
                         startActivity(intent);
                         Toast.makeText(getApplicationContext(),key1,Toast.LENGTH_SHORT).show();
@@ -133,6 +135,7 @@ public class Dhaka extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddPlaces.class);
+                intent.putExtra("div",div);
                 startActivity(intent);
             }
         });

@@ -37,51 +37,36 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
 
     private Button addplacesbtn;
     private EditText addplacesedit, addplacesname;
-    private DatabaseReference mDatabase;
-    private FirebaseStorage mStorage;
-    private StorageReference mStorageref,imageRef;
+
     private ImageView addplacesimg;
-    // Image request code for onActivityResult() .
+
     int Image_Request_Code = 7;
 
-    private ProgressDialog progressDialog ;
-    // Folder path for Firebase Storage.
-    private String Storage_Path = "All_Image_Uploads/";
+    private Uri FilePathUri;
 
-    // Root Database Name for Firebase Database.
-    private String Database_Path = "All_Image_Uploads_Database";
+    private ProgressBar progressBarAdd;
+    private String div;
     StorageTask uploadTask;
 
-    // Creating URI.
-    private Uri FilePathUri;
-    // Creating StorageReference and DatabaseReference object.
-    private StorageReference storageReference;
     private DatabaseReference databaseReference;
-    private ProgressBar progressBarAdd;
+    private StorageReference storageReference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_places);
-
+        div = getIntent().getStringExtra("div");
         addplacesbtn = findViewById(R.id.addplacesbtn);
         addplacesedit = findViewById(R.id.addplacesedit);
         addplacesimg = findViewById(R.id.addplaceimg);
         addplacesname = findViewById(R.id.addplacesname);
         progressBarAdd = findViewById(R.id.progressbarAdd);
-        mDatabase = FirebaseDatabase.getInstance().getReference("Places: ");
-        mStorage = FirebaseStorage.getInstance();
-        mStorageref = mStorage.getReference();
         addplacesbtn.setOnClickListener(this);
         addplacesimg.setOnClickListener(this);
-
-
-
-
-
-
         storageReference = FirebaseStorage.getInstance().getReference();
-        databaseReference = FirebaseDatabase.getInstance().getReference(Database_Path);
+        databaseReference = FirebaseDatabase.getInstance().getReference(div+"-Places:");
+
     }
 
     @Override
@@ -155,6 +140,7 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
     private void UploadImageFileToFirebaseStorage() {
         final String imagename = addplacesname.getText().toString().trim();
         final String placesdetails = addplacesedit.getText().toString();
+
         progressBarAdd.setVisibility(View.VISIBLE);
         if(imagename.isEmpty()){
             addplacesname.setError("Enter the image name.");
@@ -187,8 +173,8 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
                         while(!uriTask.isSuccessful());
                         Uri downlodur = uriTask.getResult();
                         PlacesDesc placesDesc = new PlacesDesc(imagename,downlodur.toString(),placesdetails);
-                        String id = mDatabase.push().getKey();
-                        mDatabase.child(id).setValue(placesDesc);
+                        String id = databaseReference.push().getKey();
+                        databaseReference.child(id).setValue(placesDesc);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

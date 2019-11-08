@@ -52,7 +52,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textStyle="italic"
+                android:textStyle="bold"
                 android:textSize="15sp"
                 android:inputType="text"
                 android:paddingTop="10dp"
@@ -62,7 +62,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textStyle="italic"
+                android:textStyle="normal"
                 android:textSize="15sp"
                 android:inputType="textMultiLine"
                 android:paddingTop="50dp"

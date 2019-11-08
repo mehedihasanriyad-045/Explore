@@ -7,7 +7,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,6 +21,9 @@ public class Review extends AppCompatActivity {
     Button bt_dhaka;
 
     FirebaseAuth mAuth;
+    GridView gridView;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,17 +31,22 @@ public class Review extends AppCompatActivity {
         setContentView(R.layout.activity_review);
         this.setTitle("Places' Review");
         mAuth = FirebaseAuth.getInstance();
+        final String[] division = {"Dhaka", "Chattagram", "Sylhet", "Rajshahi", "Rangpur", "Khulna","Barishal","Mymensingh"};
+        gridView = findViewById(R.id.divisionView);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,R.layout.list_view,R.id.textViewlist,division);
+        gridView.setAdapter(arrayAdapter);
 
-
-        bt_dhaka = (Button) findViewById(R.id.bt_dhaka);
-
-        bt_dhaka.setOnClickListener(new View.OnClickListener() {
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(com.example.myapplication.Review.this,Dhaka.class);
-                startActivity(intent);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // set an Intent to Another Activity
+                Intent intent = new Intent(getApplicationContext(), Dhaka.class);
+                intent.putExtra("div", division[position]); // put image data in Intent
+                startActivity(intent); // start Intent
             }
         });
+
+
 
     }
 

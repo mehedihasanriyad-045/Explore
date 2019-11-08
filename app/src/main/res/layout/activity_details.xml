@@ -118,7 +118,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/rec_comment"
-                android:layout_marginTop="0dp">
+                android:layout_marginTop="0dp"
+                android:paddingBottom="2dp">
 
 
             </androidx.recyclerview.widget.RecyclerView>

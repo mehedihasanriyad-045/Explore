@@ -37,9 +37,8 @@
             android:textColorHint="#009C2E2E"
             android:textIsSelectable="true"
             android:textSize="20sp"
-            android:textStyle="bold" />
-
-
+            android:textStyle="bold"
+            android:background="#f4f4f4"/>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

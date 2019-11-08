@@ -17,16 +17,13 @@
 
         <ImageButton
             android:id="@+id/imageSelectForTour"
-            android:src="@mipmap/add_img3"
+            android:src="@drawable/addphoto"
             android:layout_width="350dp"
             android:layout_height="200dp"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
             android:layout_gravity="center"
-            android:layout_centerHorizontal="true"
-
-
-            />
+            android:layout_centerHorizontal="true" />
 
         <EditText
             android:id="@+id/tourPlace"
