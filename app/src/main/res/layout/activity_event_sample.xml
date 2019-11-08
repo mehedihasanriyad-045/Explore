@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_margin="4dp"
+    android:id="@+id/cardView"
+    card_view:cardCornerRadius="6dp"
+    card_view:contentPadding="25dp"
+    card_view:cardBackgroundColor="#585151"
+    card_view:cardElevation="6dp"
+    card_view:cardMaxElevation="10dp"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/cardImageView"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/profile"
+            android:adjustViewBounds="true"
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#080808"
+            android:isScrollContainer="false"/>
+        <TextView
+            android:id="@+id/cardPlaceName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Place : "
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:paddingLeft="15sp"
+            android:paddingRight="15sp"
+            android:paddingTop="15sp"
+            android:paddingBottom="8sp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp">
+
+            <TextView
+                android:id="@+id/eventOwner"
+                android:layout_width="65dp"
+                android:layout_height="match_parent"
+                android:paddingLeft="15sp"
+                android:paddingRight="10sp"
+                android:paddingBottom="10sp"
+                android:text="Host : "
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/cardHostName"
+                android:layout_width="153dp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/postTime"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:autoSizeTextType="uniform"
+                android:paddingStart="15dp"
+                android:text="(22:15 03 Nov,2018)"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/cardStartingDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15sp"
+                android:paddingRight="15sp"
+                android:paddingBottom="8sp"
+                android:text="Starting Date : "
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/postDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:paddingLeft="15sp"
+                android:paddingRight="15sp"
+                android:paddingBottom="8sp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15sp"
+                android:paddingRight="15sp"
+                android:paddingBottom="9sp"
+                android:text="Duration :"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/CardDuration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:paddingLeft="15sp"
+                android:paddingRight="15sp"
+                android:paddingBottom="9sp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Approximate Amount : "
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:paddingLeft="15sp"
+                android:paddingRight="15sp"
+                android:paddingBottom="9sp" />
+
+            <TextView
+                android:id="@+id/cardTourCost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:paddingLeft="15sp"
+                android:paddingRight="15sp"
+                android:paddingBottom="9sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutLikeComments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/like_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_like_grey"
+                android:background="#FFF"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="3dp"
+                android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/noLikes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#f61b0a"
+                android:layout_marginTop="1sp"
+                android:layout_marginLeft="2sp"
+
+                android:layout_marginBottom="8sp"
+                android:gravity="center"
+                android:textSize="17sp"
+                />
+
+            <Button
+                android:id="@+id/comment"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10sp"
+                android:layout_marginBottom="5sp"
+                android:background="#3E3D3D"
+                android:gravity="center"
+                android:text="Comment"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/seeComments"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10sp"
+                android:layout_marginBottom="5sp"
+                android:background="#3E3D3D"
+                android:gravity="center"
+
+                android:text="See Comments"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btnJoinEvent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="JOIN" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/expand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="5"
+            android:visibility="gone">
+            <EditText
+                android:id="@+id/fldComment"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Post a comment"
+                android:textSize="18sp"
+                android:layout_margin="10sp"/>
+            <Button
+                android:id="@+id/postComment"
+                android:layout_width="match_parent"
+                android:layout_height="35sp"
+                android:layout_gravity="center"
+                android:text="Post"
+                android:background="@color/colorPrimary"
+                android:textColor="#3E3D3D"
+                android:gravity="center"
+                android:layout_weight="4"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
