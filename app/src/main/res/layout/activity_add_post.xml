@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.myapplication.AddPost"
+    android:layout_margin="15sp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+
+        <ImageButton
+            android:id="@+id/imageSelectForTour"
+            android:src="@mipmap/add_img3"
+            android:layout_width="350dp"
+            android:layout_height="200dp"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+
+
+            />
+
+        <EditText
+            android:id="@+id/tourPlace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12sp"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:hint="Place"
+
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12sp">
+
+            <Button
+                android:id="@+id/btnDate" android:layout_width="wrap_content"
+                android:layout_height="25sp"
+                android:text="Date"
+                android:textColor="#FFF"
+                android:layout_marginRight="10sp"
+                android:background="@drawable/buttonshape"/>
+            <TextView
+                android:id="@+id/fldDesc"
+                android:layout_width="match_parent"
+                android:textSize="15sp"
+                android:layout_height="wrap_content"
+
+                android:padding="12sp"
+                android:hint="Pick a date"/>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/fldDuration"
+            android:layout_width="match_parent"
+            android:textSize="15sp"
+            android:layout_height="wrap_content"
+            android:padding="12sp"
+            android:hint="Duration (days)"
+            android:inputType="number"/>
+
+        <EditText
+            android:id="@+id/approxTourCost"
+            android:layout_width="match_parent"
+            android:textSize="15sp"
+            android:layout_height="wrap_content"
+            android:padding="12sp"
+            android:hint="Approximate Amount (taka)"
+            android:inputType="number"/>
+
+
+        <Button
+            android:layout_marginTop="10sp"
+            android:id="@+id/btnPost"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/buttonshape"
+            android:text="Create Event"
+            android:textColor="#FFF" />
+
+        <Button
+            android:id="@+id/btnNewsFeed"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="View Events"
+            android:textColor="#FFF"
+            android:background="@drawable/buttonshape"/>
+        <ProgressBar
+            android:id="@+id/progressbaraddpost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
