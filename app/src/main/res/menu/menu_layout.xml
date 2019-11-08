@@ -4,13 +4,5 @@
     <item
         android:title="Log in"
         android:id="@+id/logInMenuId"/>
-    <item
-        android:title="Profile"
-        android:id="@+id/ProfileMenuId"/>
-    <item
-        android:title="Sign-out"
-        android:id="@+id/signOutMenuId"/>
-
-
 
 </menu>

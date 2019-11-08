@@ -127,14 +127,10 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener{
                         String prevActivity = intent.getStringExtra("prevActivity");
                         if(prevActivity.equals("CreatePlan"))
                         {
-                            Intent intent1 = new Intent(getApplicationContext(),CreatePlan.class);
+                            Intent intent1 = new Intent(getApplicationContext(),AddPost.class);
                             startActivity(intent1);
                         }
-                        else if(prevActivity.equals("write"))
-                        {
-                            Intent intent1 = new Intent(getApplicationContext(),WriteReview.class);
-                            startActivity(intent1);
-                        }
+
                         else if(prevActivity.equals("Menu"))
                         {
                             Intent intent1 = new Intent(getApplicationContext(),Menu.class);
