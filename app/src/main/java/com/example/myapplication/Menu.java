@@ -35,26 +35,7 @@ public class Menu extends AppCompatActivity {
             }
         });
 
-        bt_writereview =  findViewById(R.id.bt_wtitereview);
 
-        bt_writereview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(FirebaseAuth.getInstance().getCurrentUser() == null)
-                {
-                    Toast.makeText(getApplicationContext(), "You have to log in", Toast.LENGTH_SHORT).show();
-                    Intent intent1 = new Intent(Menu.this,LogIn.class);
-                    intent1.putExtra("prevActivity", "write");
-                    startActivity(intent1);
-                }
-                else {
-                    Intent intent1 = new Intent(Menu.this,WriteReview.class);
-                    startActivity(intent1);
-                }
-
-            }
-        });
 
         bt_tourplan =  findViewById(R.id.bt_tourplan);
 
@@ -72,7 +53,7 @@ public class Menu extends AppCompatActivity {
                     startActivity(intent1);
                 }
                 else {
-                    Intent intent1 = new Intent(Menu.this,CreatePlan.class);
+                    Intent intent1 = new Intent(Menu.this,AddPost.class);
                     startActivity(intent1);
                 }
 
@@ -94,7 +75,13 @@ public class Menu extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
 
-        getMenuInflater().inflate(R.menu.menu_layout,menu);
+        if(FirebaseAuth.getInstance().getCurrentUser() == null) {
+            getMenuInflater().inflate(R.menu.nlogin_menu_layout, menu);
+        }
+        else{
+            getMenuInflater().inflate(R.menu.login_menu_layout, menu);
+        }
+
         return super.onCreateOptionsMenu(menu);
     }
 

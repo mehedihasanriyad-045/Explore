@@ -40,8 +40,12 @@ public class Review extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu_layout,menu);
+        if(FirebaseAuth.getInstance().getCurrentUser() == null) {
+            getMenuInflater().inflate(R.menu.nlogin_menu_layout, menu);
+        }
+        else{
+            getMenuInflater().inflate(R.menu.login_menu_layout, menu);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
