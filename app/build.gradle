@@ -60,6 +60,9 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
 
 
+    implementation 'com.github.androdocs:Simple-HTTP-Request:v1.0'
+
+
     testImplementation 'junit:junit:4.12'
 
     androidTestImplementation 'androidx.test:runner:1.2.0'

@@ -47,7 +47,6 @@ public class AddContact extends AppCompatActivity {
 
         String nameUser = name.getText().toString().trim();
         String phoneNumber = phone.getText().toString().trim();
-        Toast.makeText(getApplicationContext(),nameUser+"   "+phoneNumber,Toast.LENGTH_SHORT).show();
 
 
         if(nameUser.isEmpty()){
