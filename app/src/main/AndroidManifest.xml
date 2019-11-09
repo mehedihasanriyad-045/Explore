@@ -18,8 +18,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".weather"
-            android:screenOrientation="portrait"></activity>
+        <activity android:name=".ReviewRequest"></activity>
+        <activity
+            android:name=".weather"
+            android:screenOrientation="portrait" />
         <activity android:name=".AddContact" />
         <activity android:name=".AddPlaces" />
         <activity android:name=".Profile" />

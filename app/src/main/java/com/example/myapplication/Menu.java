@@ -29,6 +29,7 @@ public class Menu extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+
         bt_review =  findViewById(R.id.bt_Review);
 
         bt_review.setOnClickListener(new View.OnClickListener() {
@@ -130,7 +131,9 @@ public class Menu extends AppCompatActivity {
             getMenuInflater().inflate(R.menu.nlogin_menu_layout, menu);
         }
         else{
+
             getMenuInflater().inflate(R.menu.login_menu_layout, menu);
+
         }
 
         return super.onCreateOptionsMenu(menu);
@@ -167,6 +170,8 @@ public class Menu extends AppCompatActivity {
             }
         }
         if(item.getItemId() == R.id.ProfileMenuId){
+            //String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+            //Toast.makeText(getApplicationContext(),email,Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(), Profile.class);
             startActivity(intent);
         }

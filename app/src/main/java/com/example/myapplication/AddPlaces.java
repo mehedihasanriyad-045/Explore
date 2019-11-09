@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -48,7 +49,7 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
     private String div;
     StorageTask uploadTask;
 
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference,databaseReference1;
     private StorageReference storageReference;
 
 
@@ -66,6 +67,7 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
         addplacesimg.setOnClickListener(this);
         storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference(div+"-Places:");
+        databaseReference1 = FirebaseDatabase.getInstance().getReference(div+"user-Places:");
 
     }
 
@@ -173,8 +175,19 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
                         while(!uriTask.isSuccessful());
                         Uri downlodur = uriTask.getResult();
                         PlacesDesc placesDesc = new PlacesDesc(imagename,downlodur.toString(),placesdetails);
-                        String id = databaseReference.push().getKey();
-                        databaseReference.child(id).setValue(placesDesc);
+                        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+                        if(email.equals("mehedi.24csedu.045@gmail.com") || email.equals("riyadmehedihasan19@gmail.com"))
+                        {
+                            String id = databaseReference.push().getKey();
+                            databaseReference.child(id).setValue(placesDesc);
+                        }
+
+
+                        else {
+                            String id  = databaseReference1.push().getKey();
+                            databaseReference1.child(id).setValue(placesDesc);
+                        }
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

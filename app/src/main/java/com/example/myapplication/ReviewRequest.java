@@ -34,12 +34,12 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dhaka extends AppCompatActivity {
+public class ReviewRequest extends AppCompatActivity {
 
-    private Button dhaka;
+
     private RecyclerView recyclerView;
 
-    private MyAdpater myAdpater;
+    private UserReqAdapter userReqAdapter;
     private List<PlacesDesc>placesDescList;
     DatabaseReference databaseReference;
     private ProgressBar progressBar;
@@ -52,7 +52,7 @@ public class Dhaka extends AppCompatActivity {
         setContentView(R.layout.activity_dhaka);
         div = getIntent().getStringExtra("div");
 
-        this.setTitle(div);
+        this.setTitle("User Review Request for: "+div);
         recyclerView = findViewById(R.id.dhakaRecycle);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -61,7 +61,7 @@ public class Dhaka extends AppCompatActivity {
 
         firebaseStorage = FirebaseStorage.getInstance();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference(div+"-Places:");
+        databaseReference = FirebaseDatabase.getInstance().getReference(div+"user-Places:");
 
 
 
@@ -81,9 +81,9 @@ public class Dhaka extends AppCompatActivity {
                 }
 
 
-                myAdpater  = new MyAdpater(getApplicationContext(),placesDescList);
-                recyclerView.setAdapter(myAdpater);
-                myAdpater.setOnItemClickListener(new MyAdpater.OnItemClickListener() {
+                userReqAdapter  = new UserReqAdapter(getApplicationContext(),placesDescList);
+                recyclerView.setAdapter(userReqAdapter);
+                userReqAdapter.setOnItemClickListener(new UserReqAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick( View v, int position) {
 
@@ -129,16 +129,6 @@ public class Dhaka extends AppCompatActivity {
             }
         });
 
-        dhaka = (Button) findViewById(R.id.dhakaaddplaces);
-
-        dhaka.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddPlaces.class);
-                intent.putExtra("div",div);
-                startActivity(intent);
-            }
-        });
 
     }
 
@@ -150,16 +140,7 @@ public class Dhaka extends AppCompatActivity {
             getMenuInflater().inflate(R.menu.nlogin_menu_layout, menu);
         }
         else{
-            String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
-            if(email.equals("mehedi.24csedu.045@gmail.com") || email.equals("riyadmehedihasan19@gmail.com"))
-            {
-                getMenuInflater().inflate(R.menu.adminlogin, menu);
-            }
-
-
-            else {
-                getMenuInflater().inflate(R.menu.login_menu_layout, menu);
-            }
+            getMenuInflater().inflate(R.menu.login_menu_layout, menu);
         }
 
         return super.onCreateOptionsMenu(menu);
@@ -196,12 +177,7 @@ public class Dhaka extends AppCompatActivity {
                 startActivity(intent);
             }
         }
-        if(item.getItemId() == R.id.req)
-        {
-            Intent intent = new Intent(getApplicationContext(), ReviewRequest.class);
-            intent.putExtra("div", div);
-            startActivity(intent);
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
