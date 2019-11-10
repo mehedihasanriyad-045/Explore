@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -18,6 +19,9 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
 
     private Context context;
     private List<EventImage> eventList;
+
+    FirebaseUser firebaseUser;
+
 
 
 
@@ -38,6 +42,8 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
 
     @Override
     public void onBindViewHolder(@NonNull EventViewHolder myViewHolder, int position) {
+
+
         EventImage eventImage = eventList.get(position);
         //EventImage eventImage = eventList.get(position);
         myViewHolder.tourplace.setText(eventImage.getPlace());
@@ -46,7 +52,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
         myViewHolder.cost.setText(eventImage.getAmount());
         myViewHolder.date.setText("Starting : " + eventImage.getDate());
         myViewHolder.postTime.setText(eventImage.getPostTime());
-        //myViewHolder.name.setText();
+        myViewHolder.name.setText(eventImage.name);
 
     }
 

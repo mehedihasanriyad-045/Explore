@@ -36,6 +36,17 @@
 
             />
 
+        <EditText
+            android:id="@+id/tourDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12sp"
+            android:textSize="17sp"
+            android:textStyle="normal"
+            android:inputType="textMultiLine"
+            android:hint="Short Description"
+            />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

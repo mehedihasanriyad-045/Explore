@@ -32,6 +32,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -46,7 +47,7 @@ import java.util.Calendar;
 public class AddPost extends AppCompatActivity implements View.OnClickListener {
 
     private Button postBtn, dateBtn, viewEvents;
-    private EditText addTourplace;
+    private EditText addTourplace,tourDesc;
     private EditText tourDuration, tourCost;
     private TextView dateView;
     private TextView date;
@@ -81,6 +82,8 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
 
     Context context;
 
+    FirebaseUser firebaseUser;
+
 
 
 
@@ -101,6 +104,7 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
         addPlacesImg = findViewById(R.id.imageSelectForTour);
         dateView = findViewById(R.id.fldDesc);
         progressBaraddpost = findViewById(R.id.progressbaraddpost);
+        tourDesc = findViewById(R.id.tourDesc);
 
         //eventsAdapter = new EventsAdapter(getApplicationContext(), )
 
@@ -303,10 +307,12 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
         final String duration = tourDuration.getText().toString();
         final String amount = tourCost.getText().toString();
         final String adate = dateView.getText().toString().trim();
-                addTourplace.setText("");
-                tourDuration.setText("");
-                tourCost.setText("");
-                dateView.setText("");
+        final String desc = tourDesc.getText().toString().trim();
+        addTourplace.setText("");
+        tourDuration.setText("");
+        tourCost.setText("");
+        dateView.setText("");
+        tourDesc.setText("");
 
 
         StorageReference ref = storageReference.child(System.currentTimeMillis()+"."+GetFileExtension(FilePathUri));
@@ -321,7 +327,9 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
                         Task<Uri> uriTask = taskSnapshot.getMetadata().getReference().getDownloadUrl();
                         while(!uriTask.isSuccessful());
                         Uri downloduri = uriTask.getResult();
-                        EventImage eventImage = new EventImage(downloduri.toString(), amount, duration, addtourplaces, adate, FirebaseAuth.getInstance().getCurrentUser().getUid(), java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
+                        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                        String name = firebaseUser.getDisplayName();
+                        EventImage eventImage = new EventImage(downloduri.toString(), amount, duration, addtourplaces, adate, FirebaseAuth.getInstance().getCurrentUser().getUid(), java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()),name,desc);
                         String id = mDatabase.push().getKey();
                         mDatabase.child(id).setValue(eventImage);
                     }
