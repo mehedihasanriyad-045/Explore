@@ -92,7 +92,7 @@ public class ReviewRequest extends AppCompatActivity {
                         String desc = placesDescList.get(position).getPlacesdesc();
                         String imageurl = placesDescList.get(position).getImageurl();
                         String key1 = placesDescList.get(position).getKey();
-                        Intent intent = new Intent(getApplicationContext(),Details.class);
+                        Intent intent = new Intent(getApplicationContext(),UserReviewDetails.class);
                         intent.putExtra("PlaceName",imageName);
                         intent.putExtra("Description", desc);
                         intent.putExtra("URL", imageurl);
