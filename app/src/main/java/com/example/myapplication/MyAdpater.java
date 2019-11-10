@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.lang.annotation.Documented;
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class MyAdpater extends RecyclerView.Adapter<MyAdpater.MyViewHolder>
@@ -44,8 +45,10 @@ public class MyAdpater extends RecyclerView.Adapter<MyAdpater.MyViewHolder>
 
         PlacesDesc placesDesc = placesDescList.get(position);
         holder.placesname.setText(placesDesc.getImagename());
-        String rat = String.valueOf(placesDesc.getRating());
-        holder.rating.setText("Rating: "+rat);
+        DecimalFormat dec = new DecimalFormat("#0.00");
+        double rat = placesDesc.getRating();
+
+        holder.rating.setText("Rating: "+String.valueOf(dec.format(rat)));
 
         Picasso.get().load(placesDesc.getImageurl()).fit().centerCrop().into(holder.imageView);
 

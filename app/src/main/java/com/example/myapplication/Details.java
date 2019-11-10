@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,22 +29,28 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Details extends AppCompatActivity {
 
-    private TextView detailsName, detailsDesc;
+    private TextView detailsName, detailsDesc,rat;
     private ImageView detailsImage;
     private ProgressBar progressBar;
     private FirebaseUser firebaseUser;
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth firebaseAuth;
     private EditText detComment;
-    private Button add;
-    private String prev,key,key1;
+    private Button add,submit;
+    private String prev,key,key1,ratingIndb,sumIndb,countIndb,div;
+    RatingBar ratingBar;
     RecyclerView RecyclerViewComment;
     DataSnapshot dataSnapshot;
+    public double rate,sum;
+    double mrate;
+    public int count;
+    DatabaseReference databaseReference;
 
     CommentAdapter commentAdapter;
     List<Comment> commentList;
@@ -67,10 +74,22 @@ public class Details extends AppCompatActivity {
         String description = getIntent.getStringExtra("Description");
         String url = getIntent.getStringExtra("URL");
         prev = getIntent.getStringExtra("Div");
+        div = getIntent.getStringExtra("div");
         key =  getIntent.getStringExtra("Key");
+        ratingIndb = getIntent.getStringExtra("rat");
+        sumIndb = getIntent.getStringExtra("sum");
+        countIndb = getIntent.getStringExtra("count");
+        count = Integer.parseInt(countIndb);
+        rate  = Double.parseDouble(ratingIndb);
+        sum = Double.parseDouble(sumIndb);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference(div+"-Places:");
 
 
         RecyclerViewComment = findViewById(R.id.rec_comment);
+        rat = findViewById(R.id.det_rating);
+        submit = findViewById(R.id.rat_submit);
+        ratingBar = findViewById(R.id.ratingBar);
         detailsImage = findViewById(R.id.detailsImage);
         detailsName = findViewById(R.id.detailsName);
         detailsDesc = findViewById(R.id.detailsDesc);
@@ -82,11 +101,39 @@ public class Details extends AppCompatActivity {
         Picasso.get().load(url).fit().centerCrop().into(detailsImage);
         detailsName.setText(placeName);
         detailsDesc.setText(description);
+        DecimalFormat dec = new DecimalFormat("#0.00");
+        rat.setText("Rating: "+String.valueOf(dec.format(rate)));
         progressBar.setVisibility(View.GONE);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
+
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, final float rating, boolean fromUser) {
+                Toast.makeText(getApplicationContext(),"Your given rating: "+String.valueOf(rating)+". Submit please",Toast.LENGTH_SHORT).show();
+
+                submit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        count++;
+                        sum = sum + rating;
+
+                        DecimalFormat dec = new DecimalFormat("#0.00");
+                        //Toast.makeText(getApplicationContext(),"Count "+String.valueOf(count)+" Rate: "+String.valueOf(dec.format(rate))+" Sum"+String.valueOf(dec.format(sum)),Toast.LENGTH_SHORT).show();
+                        rate = (sum) / count;
+                        rat.setText("Rating: "+String.valueOf(dec.format(rate)));
+                        databaseReference.child(key).child("rating").setValue(rate);
+                        databaseReference.child(key).child("sum").setValue(sum);
+                        databaseReference.child(key).child("count").setValue(count);
+                        submit.setEnabled(false);
+
+                    }
+                });
+
+            }
+        });
 
 
         add.setOnClickListener(new View.OnClickListener() {

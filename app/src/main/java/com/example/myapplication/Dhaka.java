@@ -92,14 +92,21 @@ public class Dhaka extends AppCompatActivity {
                         String desc = placesDescList.get(position).getPlacesdesc();
                         String imageurl = placesDescList.get(position).getImageurl();
                         String key1 = placesDescList.get(position).getKey();
+                        String rating = String.valueOf(placesDescList.get(position).getRating());
+                        String sum = String.valueOf(placesDescList.get(position).getSum());
+                        String count = String.valueOf(placesDescList.get(position).getCount());
                         Intent intent = new Intent(getApplicationContext(),Details.class);
                         intent.putExtra("PlaceName",imageName);
                         intent.putExtra("Description", desc);
                         intent.putExtra("URL", imageurl);
                         intent.putExtra("Div",div+" ");
+                        intent.putExtra("div",div);
+                        intent.putExtra("rat",rating);
+                        intent.putExtra("sum",sum);
+                        intent.putExtra("count",count);
                         intent.putExtra("Key",key1);
                         startActivity(intent);
-                        Toast.makeText(getApplicationContext(),key1,Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(),key1,Toast.LENGTH_SHORT).show();
                     }
 
 
