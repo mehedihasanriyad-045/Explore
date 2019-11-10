@@ -44,6 +44,9 @@ public class MyAdpater extends RecyclerView.Adapter<MyAdpater.MyViewHolder>
 
         PlacesDesc placesDesc = placesDescList.get(position);
         holder.placesname.setText(placesDesc.getImagename());
+        String rat = String.valueOf(placesDesc.getRating());
+        holder.rating.setText("Rating: "+rat);
+
         Picasso.get().load(placesDesc.getImageurl()).fit().centerCrop().into(holder.imageView);
 
 
@@ -55,12 +58,13 @@ public class MyAdpater extends RecyclerView.Adapter<MyAdpater.MyViewHolder>
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener, View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
-        TextView placesname;
+        TextView placesname,rating;
         ImageView imageView;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.place_images);
             placesname = itemView.findViewById(R.id.place_name);
+            rating = itemView.findViewById(R.id.place_rating);
             itemView.setOnClickListener(this);
             itemView.setOnCreateContextMenuListener(this);
 

@@ -174,12 +174,15 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
                         Task<Uri> uriTask = taskSnapshot.getMetadata().getReference().getDownloadUrl();
                         while(!uriTask.isSuccessful());
                         Uri downlodur = uriTask.getResult();
-                        PlacesDesc placesDesc = new PlacesDesc(imagename,downlodur.toString(),placesdetails);
+                        PlacesDesc placesDesc = new PlacesDesc(imagename,downlodur.toString(),placesdetails,0.0,0.0,0);
                         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
                         if(email.equals("mehedi.24csedu.045@gmail.com") || email.equals("riyadmehedihasan19@gmail.com"))
                         {
+
+
                             String id = databaseReference.push().getKey();
                             databaseReference.child(id).setValue(placesDesc);
+
                         }
 
 
