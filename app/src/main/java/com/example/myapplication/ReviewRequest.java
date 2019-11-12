@@ -1,18 +1,21 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,10 +44,11 @@ public class ReviewRequest extends AppCompatActivity {
 
     private UserReqAdapter userReqAdapter;
     private List<PlacesDesc>placesDescList;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference,databaseReference1;
     private ProgressBar progressBar;
     private FirebaseStorage firebaseStorage;
     private String key,div;
+    private int pos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,7 @@ public class ReviewRequest extends AppCompatActivity {
         firebaseStorage = FirebaseStorage.getInstance();
 
         databaseReference = FirebaseDatabase.getInstance().getReference(div+"user-Places:");
+        databaseReference1 = FirebaseDatabase.getInstance().getReference(div+"-Places:");
 
 
 
@@ -105,18 +110,49 @@ public class ReviewRequest extends AppCompatActivity {
 
                     @Override
                     public void DELETE(int position) {
-                        PlacesDesc selectedItem = placesDescList.get(position);
-                        final String key = selectedItem.getKey();
 
-                        StorageReference storageReference = firebaseStorage.getReferenceFromUrl(selectedItem.getImageurl());
-                        storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        pos = position;
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ReviewRequest.this);
+                        builder.setTitle("Select Option");
+
+                        // Set up the buttons
+                        builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onSuccess(Void aVoid) {
+                            public void onClick(DialogInterface dialog, int which) {
 
-                                databaseReference.child(key).removeValue();
+                                String imageName = placesDescList.get(pos).getImagename();
+                                String desc = placesDescList.get(pos).getPlacesdesc();
+                                String imageurl = placesDescList.get(pos).getImageurl();
+                                PlacesDesc placesDesc = new PlacesDesc(imageName,imageurl,desc,0.0,0.0,0);
+                                String id = databaseReference.push().getKey();
+                                databaseReference1.child(id).setValue(placesDesc);
 
                             }
                         });
+                        builder.setNegativeButton("Cancel Request", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                PlacesDesc selectedItem = placesDescList.get(pos);
+                                final String key = selectedItem.getKey();
+                                StorageReference storageReference = firebaseStorage.getReferenceFromUrl(selectedItem.getImageurl());
+                                storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        databaseReference.child(key).removeValue();
+
+                                    }
+                                });
+                                dialog.cancel();
+                            }
+                        });
+                        builder.show();
+
+
+
+
+
                     }
                 });
                 progressBar.setVisibility(View.INVISIBLE);

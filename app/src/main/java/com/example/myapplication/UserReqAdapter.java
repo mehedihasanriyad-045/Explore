@@ -83,7 +83,7 @@ public class UserReqAdapter extends RecyclerView.Adapter<UserReqAdapter.MyViewHo
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
 
             menu.setHeaderTitle("Choose an action");
-            MenuItem Delete = menu.add(menu.NONE,1,1,"Delete");
+            MenuItem Delete = menu.add(menu.NONE,1,1,"Select");
 
             Delete.setOnMenuItemClickListener(this);
 
