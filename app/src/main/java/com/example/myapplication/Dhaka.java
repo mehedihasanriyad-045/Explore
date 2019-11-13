@@ -2,6 +2,8 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -52,6 +55,10 @@ public class Dhaka extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dhaka);
         div = getIntent().getStringExtra("div");
+
+        ActionBar actionBar = getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#000000"));
+        actionBar.setBackgroundDrawable(colorDrawable);
 
         this.setTitle(div);
         recyclerView = findViewById(R.id.dhakaRecycle);

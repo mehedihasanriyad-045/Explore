@@ -1,9 +1,12 @@
 package com.example.myapplication;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +39,10 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_log_in);
 
         this.setTitle("Sign In Here");
+
+        ActionBar actionBar = getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#000000"));
+        actionBar.setBackgroundDrawable(colorDrawable);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();

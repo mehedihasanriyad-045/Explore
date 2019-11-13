@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -66,6 +68,8 @@ public class Details extends AppCompatActivity {
         //Action Bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Review");
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#000000"));
+        actionBar.setBackgroundDrawable(colorDrawable);
 
         //Set back button
         actionBar.setDisplayHomeAsUpEnabled(true);
