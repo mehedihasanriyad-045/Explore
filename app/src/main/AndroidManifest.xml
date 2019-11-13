@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditPost"></activity>
+        <activity android:name=".PlacesName"></activity>
+        <activity android:name=".EditPost" />
         <activity android:name=".UserReviewDetails" />
         <activity android:name=".ReviewRequest" />
         <activity

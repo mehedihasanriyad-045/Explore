@@ -86,7 +86,11 @@ public class Menu extends AppCompatActivity {
         bt_weather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popUpEditText();
+                //popUpEditText();
+
+                Intent intent = new Intent(getApplicationContext(),PlacesName.class);
+
+                startActivity(intent);
             }
         });
 
