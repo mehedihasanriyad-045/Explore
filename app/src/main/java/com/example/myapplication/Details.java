@@ -3,6 +3,7 @@ package com.example.myapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,7 +44,7 @@ public class Details extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private EditText detComment;
     private Button add,submit;
-    private String prev,key,key1,ratingIndb,sumIndb,countIndb,div;
+    private String prev,key,key1,ratingIndb,sumIndb,countIndb,div,placeName,description;
     RatingBar ratingBar;
     RecyclerView RecyclerViewComment;
     DataSnapshot dataSnapshot;
@@ -70,8 +71,8 @@ public class Details extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDefaultDisplayHomeAsUpEnabled(true);
         final Intent getIntent = getIntent();
-        String placeName = getIntent.getStringExtra("PlaceName");
-        String description = getIntent.getStringExtra("Description");
+        placeName = getIntent.getStringExtra("PlaceName");
+        description = getIntent.getStringExtra("Description");
         String url = getIntent.getStringExtra("URL");
         prev = getIntent.getStringExtra("Div");
         div = getIntent.getStringExtra("div");
@@ -218,10 +219,22 @@ public class Details extends AppCompatActivity {
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
 
         if(FirebaseAuth.getInstance().getCurrentUser() == null) {
-            getMenuInflater().inflate(R.menu.nlogin_menu_layout, menu);
+            getMenuInflater().inflate(R.menu.nlogin_search, menu);
+
         }
         else{
-            getMenuInflater().inflate(R.menu.login_menu_layout, menu);
+            String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+            if(email.equals("mehedi.24csedu.045@gmail.com") || email.equals("riyadmehedihasan19@gmail.com"))
+            {
+                getMenuInflater().inflate(R.menu.admin, menu);
+
+            }
+
+
+            else {
+                getMenuInflater().inflate(R.menu.login_menu_layout, menu);
+
+            }
         }
 
         return super.onCreateOptionsMenu(menu);
@@ -261,6 +274,16 @@ public class Details extends AppCompatActivity {
         if(item.getItemId() == R.id.ProfileMenuId){
 
             Intent intent = new Intent(getApplicationContext(), Profile.class);
+            startActivity(intent);
+        }
+
+        if(item.getItemId() == R.id.edit){
+
+            Intent intent = new Intent(getApplicationContext(), EditPost.class);
+            intent.putExtra("name",placeName);
+            intent.putExtra("desc", description);
+            intent.putExtra("div",div);
+            intent.putExtra("key",key);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
