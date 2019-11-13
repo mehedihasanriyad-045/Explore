@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,12 +22,13 @@ import java.lang.annotation.Documented;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class MyAdpater extends RecyclerView.Adapter<MyAdpater.MyViewHolder>
-{
+public class MyAdpater extends RecyclerView.Adapter<MyAdpater.MyViewHolder> implements Filterable {
 
     private Context context;
     private List<PlacesDesc> placesDescList;
     private OnItemClickListener listener;
+    private List<PlacesDesc> placesDescListAll;
+
 
     public MyAdpater(Context context, List<PlacesDesc> placesDescList) {
         this.context = context;
@@ -58,6 +61,12 @@ public class MyAdpater extends RecyclerView.Adapter<MyAdpater.MyViewHolder>
     @Override
     public int getItemCount() {
         return placesDescList.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+
+        return null;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener, View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {

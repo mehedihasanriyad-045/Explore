@@ -197,6 +197,12 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
                 startActivity(intent);
             }
         }
+        if(item.getItemId() == R.id.ProfileMenuId){
+            //String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+            //Toast.makeText(getApplicationContext(),email,Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), Profile.class);
+            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }

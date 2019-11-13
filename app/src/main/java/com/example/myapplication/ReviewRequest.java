@@ -109,7 +109,7 @@ public class ReviewRequest extends AppCompatActivity {
 
 
                     @Override
-                    public void DELETE(int position) {
+                    public void Select(int position) {
 
                         pos = position;
 
@@ -127,6 +127,17 @@ public class ReviewRequest extends AppCompatActivity {
                                 PlacesDesc placesDesc = new PlacesDesc(imageName,imageurl,desc,0.0,0.0,0);
                                 String id = databaseReference.push().getKey();
                                 databaseReference1.child(id).setValue(placesDesc);
+
+                                PlacesDesc selectedItem = placesDescList.get(pos);
+                                final String key = selectedItem.getKey();
+                                StorageReference storageReference = firebaseStorage.getReferenceFromUrl(selectedItem.getImageurl());
+                                storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        databaseReference.child(key).removeValue();
+
+                                    }
+                                });
 
                             }
                         });

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -111,8 +112,8 @@ public class Dhaka extends AppCompatActivity {
 
 
                     @Override
-                    public void DELETE(int position) {
-                        PlacesDesc selectedItem = placesDescList.get(position);
+                    public void DELETE(int postion) {
+                        PlacesDesc selectedItem = placesDescList.get(postion);
                         final String key = selectedItem.getKey();
 
                         StorageReference storageReference = firebaseStorage.getReferenceFromUrl(selectedItem.getImageurl());
@@ -120,7 +121,7 @@ public class Dhaka extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
 
-                                databaseReference.child(key).removeValue();
+                                databaseReference.child("-LtW2B3E47caLXuauM_8").removeValue();
 
                             }
                         });
@@ -154,22 +155,85 @@ public class Dhaka extends AppCompatActivity {
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
 
         if(FirebaseAuth.getInstance().getCurrentUser() == null) {
-            getMenuInflater().inflate(R.menu.nlogin_menu_layout, menu);
+            getMenuInflater().inflate(R.menu.nlogin_search, menu);
+            MenuItem item = menu.findItem(R.id.action_search_bar);
+            SearchView searchView = (SearchView) item.getActionView();
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    search(newText);
+                    return false;
+                }
+            });
         }
         else{
             String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
             if(email.equals("mehedi.24csedu.045@gmail.com") || email.equals("riyadmehedihasan19@gmail.com"))
             {
-                getMenuInflater().inflate(R.menu.adminlogin, menu);
+                getMenuInflater().inflate(R.menu.search, menu);
+                MenuItem item = menu.findItem(R.id.action_search_bar);
+                SearchView searchView = (SearchView) item.getActionView();
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        search(newText);
+                        return false;
+                    }
+                });
             }
 
 
             else {
-                getMenuInflater().inflate(R.menu.login_menu_layout, menu);
+                getMenuInflater().inflate(R.menu.login_search, menu);
+                MenuItem item = menu.findItem(R.id.action_search_bar);
+                SearchView searchView = (SearchView) item.getActionView();
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        search(newText);
+                        return false;
+                    }
+                });
             }
         }
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void search(String str) {
+
+        ArrayList<PlacesDesc> myList = new ArrayList<>();
+
+        for(PlacesDesc object : placesDescList){
+
+            if(object.getPlacesdesc().toLowerCase().contains(str.toLowerCase()) || object.getImagename().toLowerCase().contains(str.toLowerCase())){
+
+                myList.add(object);
+            }
+
+            MyAdpater adapter = new MyAdpater(getApplicationContext(),myList);
+            recyclerView.setAdapter(adapter);
+
+        }
+
     }
 
     @Override
@@ -207,6 +271,12 @@ public class Dhaka extends AppCompatActivity {
         {
             Intent intent = new Intent(getApplicationContext(), ReviewRequest.class);
             intent.putExtra("div", div);
+            startActivity(intent);
+        }
+        if(item.getItemId() == R.id.ProfileMenuId){
+            //String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+            //Toast.makeText(getApplicationContext(),email,Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), Profile.class);
             startActivity(intent);
         }
 
