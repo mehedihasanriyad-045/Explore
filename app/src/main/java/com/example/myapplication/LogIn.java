@@ -122,9 +122,9 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener{
                     {
                         // user is verified, so you can finish this activity or send user to activity which you want.
                         finish();
+                        String prevActivity = getIntent().getStringExtra("prevActivity");
                         Toast.makeText(getApplicationContext(), "Successfully logged in", Toast.LENGTH_SHORT).show();
-                        Intent intent = getIntent();
-                        String prevActivity = intent.getStringExtra("prevActivity");
+
                         if(prevActivity.equals("CreatePlan"))
                         {
                             Intent intent1 = new Intent(getApplicationContext(),AddPost.class);
@@ -134,6 +134,11 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener{
                         else if(prevActivity.equals("Menu"))
                         {
                             Intent intent1 = new Intent(getApplicationContext(),Menu.class);
+                            startActivity(intent1);
+                        }
+                        else if(prevActivity.equals("Review"))
+                        {
+                            Intent intent1 = new Intent(getApplicationContext(),Dhaka.class);
                             startActivity(intent1);
                         }
                     }

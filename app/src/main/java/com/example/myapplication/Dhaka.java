@@ -263,7 +263,7 @@ public class Dhaka extends AppCompatActivity {
 
                 finish();
                 Intent intent = new Intent(getApplicationContext(), LogIn.class);
-                intent.putExtra("prevActivity", "Menu");
+                intent.putExtra("prevActivity", "Review");
                 startActivity(intent);
             }
         }

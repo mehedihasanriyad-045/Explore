@@ -131,13 +131,11 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
                 int  month= calendar.get(Calendar.MONTH);
                 int  day= calendar.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dateDialog= new DatePickerDialog(
-                        AddPost.this,
+                DatePickerDialog dateDialog= new DatePickerDialog(AddPost.this,R.style.DialogTheme,
                         dateSetListener,
                         year,month,day);
 
                 dateDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-
                 dateDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 dateDialog.show();
             }
