@@ -66,6 +66,7 @@ public class Menu extends AppCompatActivity {
                 }
                 else {
                     Intent intent1 = new Intent(Menu.this,AddPost.class);
+                    intent1.putExtra("prev","Menu");
                     startActivity(intent1);
                 }
 

@@ -223,20 +223,20 @@ public class Details extends AppCompatActivity {
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
 
         if(FirebaseAuth.getInstance().getCurrentUser() == null) {
-            getMenuInflater().inflate(R.menu.nlogin_search, menu);
+            getMenuInflater().inflate(R.menu.nlogin_menu_layout, menu);
 
         }
         else{
             String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
             if(email.equals("mehedi.24csedu.045@gmail.com") || email.equals("riyadmehedihasan19@gmail.com"))
             {
-                getMenuInflater().inflate(R.menu.admin, menu);
+                getMenuInflater().inflate(R.menu.admin_details, menu);
 
             }
 
 
             else {
-                getMenuInflater().inflate(R.menu.login_menu_layout, menu);
+                getMenuInflater().inflate(R.menu.user_details, menu);
 
             }
         }
@@ -288,6 +288,14 @@ public class Details extends AppCompatActivity {
             intent.putExtra("desc", description);
             intent.putExtra("div",div);
             intent.putExtra("key",key);
+            startActivity(intent);
+        }
+
+        if(item.getItemId() == R.id.det_create){
+
+            Intent intent = new Intent(getApplicationContext(), AddPost.class);
+            intent.putExtra("name",placeName);
+            intent.putExtra("prev","Details");
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

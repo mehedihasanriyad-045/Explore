@@ -85,7 +85,7 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseUser firebaseUser;
 
-
+    String prev,det_name;
 
 
 
@@ -100,6 +100,8 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#000000"));
         actionBar.setBackgroundDrawable(colorDrawable);
 
+
+
         postBtn = findViewById(R.id.btnPost);
         viewEvents = findViewById(R.id.btnNewsFeed);
         addTourplace = findViewById(R.id.tourPlace);
@@ -112,6 +114,12 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
         tourDesc = findViewById(R.id.tourDesc);
 
         //eventsAdapter = new EventsAdapter(getApplicationContext(), )
+
+        prev = getIntent().getStringExtra("prev");
+        if(prev.equals("Details")){
+            det_name = getIntent().getStringExtra("name");
+            addTourplace.setText(det_name);
+        }
 
 
 
