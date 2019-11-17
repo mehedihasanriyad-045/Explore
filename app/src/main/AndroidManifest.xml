@@ -19,8 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".EventDetails"></activity>
-        <activity android:name=".PlacesName" />
-        <activity android:name=".EditPost" />
+
         <activity android:name=".UserReviewDetails" />
         <activity android:name=".ReviewRequest" />
         <activity
