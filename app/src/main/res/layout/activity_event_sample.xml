@@ -56,7 +56,7 @@
 
             <TextView
                 android:id="@+id/eventOwner"
-                android:layout_width="65dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingLeft="15sp"
                 android:paddingRight="10sp"
@@ -69,7 +69,7 @@
 
             <TextView
                 android:id="@+id/cardHostName"
-                android:layout_width="153dp"
+                android:layout_width="139dp"
                 android:layout_height="wrap_content"
                 android:paddingBottom="10sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -143,7 +143,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:paddingLeft="15sp"
+                android:paddingLeft="5sp"
                 android:paddingRight="15sp"
                 android:paddingBottom="9sp"/>
 
@@ -151,83 +151,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Approximate Amount : "
-                android:textStyle="bold"
-                android:textColor="#000000"
-                android:textSize="16sp"
                 android:paddingLeft="15sp"
                 android:paddingRight="15sp"
-                android:paddingBottom="9sp" />
+                android:paddingBottom="9sp"
+                android:text="Approximate Amount : "
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/cardTourCost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:paddingLeft="15sp"
+                android:paddingLeft="2sp"
                 android:paddingRight="15sp"
                 android:paddingBottom="9sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layoutLikeComments"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageButton
-                android:id="@+id/like_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_like_grey"
-                android:background="#FFF"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="3dp"
-                android:layout_gravity="center"/>
-            <TextView
-                android:id="@+id/noLikes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#f61b0a"
-                android:layout_marginTop="1sp"
-                android:layout_marginLeft="2sp"
-
-                android:layout_marginBottom="8sp"
-                android:gravity="center"
-                android:textSize="17sp"
-                />
-
-            <Button
-                android:id="@+id/comment"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10sp"
-                android:layout_marginBottom="5sp"
-                android:background="#3E3D3D"
-                android:gravity="center"
-                android:text="Comment"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/seeComments"
-                android:layout_width="120dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10sp"
-                android:layout_marginBottom="5sp"
-                android:background="#3E3D3D"
-                android:gravity="center"
-
-                android:text="See Comments"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/btnJoinEvent"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="JOIN" />
 
         </LinearLayout>
 
