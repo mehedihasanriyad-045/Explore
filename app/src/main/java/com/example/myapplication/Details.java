@@ -193,6 +193,7 @@ public class Details extends AppCompatActivity {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren())
                 {
                     Comment comment = snapshot.getValue(Comment.class);
+                            //snapshot.getValue(Comment.class);
                     commentList.add(comment);
 
                 }
