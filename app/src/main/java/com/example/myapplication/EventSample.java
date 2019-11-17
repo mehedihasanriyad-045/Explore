@@ -11,6 +11,4 @@ public class EventSample extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_sample);
     }
-
-
 }

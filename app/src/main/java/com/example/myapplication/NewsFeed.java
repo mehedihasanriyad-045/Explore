@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -26,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsFeed extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener{
+public class NewsFeed extends AppCompatActivity implements View.OnClickListener{
 
     private RecyclerView recyclerView;
     private EventsAdapter eventsAdapter;
@@ -34,7 +32,6 @@ public class NewsFeed extends AppCompatActivity implements View.OnClickListener,
     DatabaseReference databaseReference;
     private ProgressBar progressBar;
     private Button btnPostFromNewsFeed;
-    RecyclerTouchListener touchListener;
 
 
     @Override
@@ -50,26 +47,7 @@ public class NewsFeed extends AppCompatActivity implements View.OnClickListener,
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Swipe Options
-        touchListener = new RecyclerTouchListener(this,recyclerView);
-        touchListener
-                .setClickable(new RecyclerTouchListener.OnRowClickListener() {
-                    @Override
-                    public void onRowClicked(int position) {
-                        showToast("Clicked");
-                        // HANDLE CLICK ACTION
-                        Intent intent = new Intent(getApplicationContext(), EventDetails.class);
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onIndependentViewClicked(int independentViewID, int position) {
-
-                    }
-                });
-
         progressBar = findViewById(R.id.newsFeedProgressBar);
-
 
         btnPostFromNewsFeed = findViewById(R.id.btnGoPostEvent);
         btnPostFromNewsFeed.setOnClickListener(this);
@@ -106,27 +84,10 @@ public class NewsFeed extends AppCompatActivity implements View.OnClickListener,
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        recyclerView.addOnItemTouchListener(touchListener);
-    }
-
-    @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnGoPostEvent){
             Intent intent = new Intent(getApplicationContext(), AddPost.class);
             startActivity(intent);
         }
-    }
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        return false;
-    }
-
-    public void showToast(String message){
-        Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
     }
 }
