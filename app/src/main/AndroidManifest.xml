@@ -18,21 +18,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddContact"></activity>
-
+        <activity android:name=".EventDetails"></activity>
+        <activity android:name=".PlacesName" />
+        <activity android:name=".EditPost" />
+        <activity android:name=".UserReviewDetails" />
+        <activity android:name=".ReviewRequest" />
+        <activity
+            android:name=".weather"
+            android:screenOrientation="portrait" />
+        <activity android:name=".AddContact" />
         <activity android:name=".AddPlaces" />
         <activity android:name=".Profile" />
         <activity android:name=".ForgetPassword" />
         <activity android:name=".SignUp" />
         <activity android:name=".LogIn" />
         <activity android:name=".AddPost" />
-        <activity android:name=".NewsFeed"/>
+        <activity android:name=".NewsFeed" />
         <activity android:name=".Review" />
         <activity android:name=".Details" />
         <activity android:name=".Menu" />
         <activity android:name=".Dhaka" />
         <activity android:name=".ContactList" />
-        <activity android:name=".EventSample"></activity>
+        <activity android:name=".EventSample" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

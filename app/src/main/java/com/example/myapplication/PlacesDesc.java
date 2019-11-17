@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+
 import com.google.firebase.database.Exclude;
 
 public class PlacesDesc {
