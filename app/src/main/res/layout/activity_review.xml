@@ -1,187 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Review"
-    android:background="#FFFFFF">
-
-
-    <Button
-        android:id="@+id/bt_dhaka"
-        android:background="@drawable/buttonshape"
-        android:layout_width="104dp"
-        android:layout_height="51dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:text="Dhaka"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.205"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.475" />
-
-    <Button
-        android:layout_width="104dp"
-        android:background="@drawable/buttonshape"
-        android:layout_height="51dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:text="Chattagram"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.827"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.767" />
-
-    <Button
-        android:id="@+id/button2"
-        android:background="@drawable/buttonshape"
-        android:layout_width="104dp"
-        android:layout_height="51dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:text="Sylhet"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.205"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.767" />
-
-    <Button
-        android:layout_width="104dp"
-        android:background="@drawable/buttonshape"
-        android:layout_height="51dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:text="Rajshahi"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.827"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.67" />
-
-    <Button
-        android:layout_width="104dp"
-        android:background="@drawable/buttonshape"
-        android:layout_height="51dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:text="Rangpur"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.205"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.67" />
-
-    <Button
-        android:layout_width="104dp"
-        android:background="@drawable/buttonshape"
-        android:layout_height="51dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:text="Barishal"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.827"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.572" />
-
-    <Button
-        android:layout_width="104dp"
-        android:background="@drawable/buttonshape"
-        android:layout_height="51dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:text="Khulna"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.205"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.572" />
-
-    <Button
-        android:layout_width="104dp"
-        android:background="@drawable/buttonshape"
-        android:layout_height="51dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:text="Mymensingh"
-        android:textColor="#FFFFFF"
-        android:textSize="11.5sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.827"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.475" />
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:gravity="center">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="142dp"
-        android:layout_height="118dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.166"
+        android:paddingTop="10dp"
         app:srcCompat="@drawable/icon"
-        tools:src="@drawable/icon" />
+        android:layout_marginBottom="20dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        />
+
+    <GridView
+
+        android:id="@+id/divisionView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:verticalSpacing="50dp"
+        android:horizontalSpacing="10dp"
+        android:padding="3dp"
+        android:background="#FFFFFF"
+        android:numColumns="2">
+
+    </GridView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

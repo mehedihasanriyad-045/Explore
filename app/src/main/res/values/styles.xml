@@ -32,4 +32,8 @@
         <!-- colorControlActivated & colorControlHighlight use the colorAccent color by default -->
     </style>
 
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">#000000</item>
+    </style>
+
 </resources>

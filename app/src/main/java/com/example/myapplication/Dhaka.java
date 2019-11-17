@@ -2,6 +2,8 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,13 +48,19 @@ public class Dhaka extends AppCompatActivity {
     DatabaseReference databaseReference;
     private ProgressBar progressBar;
     private FirebaseStorage firebaseStorage;
-    private String key;
+    private String key,div;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dhaka);
-        this.setTitle("DHAKA");
+        div = getIntent().getStringExtra("div");
+
+        ActionBar actionBar = getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#000000"));
+        actionBar.setBackgroundDrawable(colorDrawable);
+
+        this.setTitle(div);
         recyclerView = findViewById(R.id.dhakaRecycle);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -59,7 +69,7 @@ public class Dhaka extends AppCompatActivity {
 
         firebaseStorage = FirebaseStorage.getInstance();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Places: ");
+        databaseReference = FirebaseDatabase.getInstance().getReference(div+"-Places:");
 
 
 
@@ -90,20 +100,27 @@ public class Dhaka extends AppCompatActivity {
                         String desc = placesDescList.get(position).getPlacesdesc();
                         String imageurl = placesDescList.get(position).getImageurl();
                         String key1 = placesDescList.get(position).getKey();
+                        String rating = String.valueOf(placesDescList.get(position).getRating());
+                        String sum = String.valueOf(placesDescList.get(position).getSum());
+                        String count = String.valueOf(placesDescList.get(position).getCount());
                         Intent intent = new Intent(getApplicationContext(),Details.class);
                         intent.putExtra("PlaceName",imageName);
                         intent.putExtra("Description", desc);
                         intent.putExtra("URL", imageurl);
-                        intent.putExtra("Div","Dhaka: ");
+                        intent.putExtra("Div",div+" ");
+                        intent.putExtra("div",div);
+                        intent.putExtra("rat",rating);
+                        intent.putExtra("sum",sum);
+                        intent.putExtra("count",count);
                         intent.putExtra("Key",key1);
                         startActivity(intent);
-                        Toast.makeText(getApplicationContext(),key1,Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(),key1,Toast.LENGTH_SHORT).show();
                     }
 
 
                     @Override
-                    public void DELETE(int position) {
-                        PlacesDesc selectedItem = placesDescList.get(position);
+                    public void DELETE(int postion) {
+                        PlacesDesc selectedItem = placesDescList.get(postion);
                         final String key = selectedItem.getKey();
 
                         StorageReference storageReference = firebaseStorage.getReferenceFromUrl(selectedItem.getImageurl());
@@ -111,7 +128,7 @@ public class Dhaka extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
 
-                                databaseReference.child(key).removeValue();
+                                databaseReference.child("-LtW2B3E47caLXuauM_8").removeValue();
 
                             }
                         });
@@ -133,6 +150,7 @@ public class Dhaka extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddPlaces.class);
+                intent.putExtra("div",div);
                 startActivity(intent);
             }
         });
@@ -144,13 +162,85 @@ public class Dhaka extends AppCompatActivity {
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
 
         if(FirebaseAuth.getInstance().getCurrentUser() == null) {
-            getMenuInflater().inflate(R.menu.nlogin_menu_layout, menu);
+            getMenuInflater().inflate(R.menu.nlogin_search, menu);
+            MenuItem item = menu.findItem(R.id.action_search_bar);
+            SearchView searchView = (SearchView) item.getActionView();
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    search(newText);
+                    return false;
+                }
+            });
         }
         else{
-            getMenuInflater().inflate(R.menu.login_menu_layout, menu);
+            String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+            if(email.equals("mehedi.24csedu.045@gmail.com") || email.equals("riyadmehedihasan19@gmail.com"))
+            {
+                getMenuInflater().inflate(R.menu.search, menu);
+                MenuItem item = menu.findItem(R.id.action_search_bar);
+                SearchView searchView = (SearchView) item.getActionView();
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        search(newText);
+                        return false;
+                    }
+                });
+            }
+
+
+            else {
+                getMenuInflater().inflate(R.menu.login_search, menu);
+                MenuItem item = menu.findItem(R.id.action_search_bar);
+                SearchView searchView = (SearchView) item.getActionView();
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        search(newText);
+                        return false;
+                    }
+                });
+            }
         }
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void search(String str) {
+
+        ArrayList<PlacesDesc> myList = new ArrayList<>();
+
+        for(PlacesDesc object : placesDescList){
+
+            if(object.getPlacesdesc().toLowerCase().contains(str.toLowerCase()) || object.getImagename().toLowerCase().contains(str.toLowerCase())){
+
+                myList.add(object);
+            }
+
+            MyAdpater adapter = new MyAdpater(getApplicationContext(),myList);
+            recyclerView.setAdapter(adapter);
+
+        }
+
     }
 
     @Override
@@ -180,9 +270,20 @@ public class Dhaka extends AppCompatActivity {
 
                 finish();
                 Intent intent = new Intent(getApplicationContext(), LogIn.class);
-                intent.putExtra("prevActivity", "Menu");
+                intent.putExtra("prevActivity", "Review");
                 startActivity(intent);
             }
+        }
+        if(item.getItemId() == R.id.req)
+        {
+            Intent intent = new Intent(getApplicationContext(), ReviewRequest.class);
+            intent.putExtra("div", div);
+            startActivity(intent);
+        }
+        if(item.getItemId() == R.id.ProfileMenuId){
+
+            Intent intent = new Intent(getApplicationContext(), Profile.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

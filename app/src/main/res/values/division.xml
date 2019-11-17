@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="division">
+        <item>Dhaka</item>
+        <item>Chattagram</item>
+        <item>Rajshahi</item>
+        <item>Sylhet</item>
+        <item>Khulna</item>
+        <item>Barishal</item>
+        <item>Rangpur</item>
+        <item>Mymensingh</item>
+    </string-array>
+
+</resources>

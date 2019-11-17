@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +11,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -75,7 +78,13 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+
+
         this.setTitle("Sign Up Here");
+
+        ActionBar actionBar = getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#000000"));
+        actionBar.setBackgroundDrawable(colorDrawable);
 
 
         // Initialize Firebase Auth

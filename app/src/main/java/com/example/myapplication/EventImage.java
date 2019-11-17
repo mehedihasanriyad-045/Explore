@@ -4,10 +4,10 @@ import com.google.firebase.database.Exclude;
 
 public class EventImage {
 
-    String imageName, imageurl, amount,duration,place,date, owner, postTime, key;
+    String imageName, imageurl, amount,duration,place,date, owner, postTime, key,name,desc;
 
 
-    public EventImage(String imageName, String amount, String duration, String place, String date, String owner, String postTime) {
+    public EventImage(String imageName, String amount, String duration, String place, String date, String owner, String postTime,String name,String desc) {
         this.imageName = imageName;
         this.amount = amount;
         this.duration = duration;
@@ -15,6 +15,8 @@ public class EventImage {
         this.date = date;
         this.owner = owner;
         this.postTime = postTime;
+        this.name = name;
+        this.desc = desc;
     }
 
     public String getImageurl() {
@@ -93,4 +95,19 @@ public class EventImage {
         this.owner = owner;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 }

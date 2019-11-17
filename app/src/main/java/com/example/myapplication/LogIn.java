@@ -1,9 +1,12 @@
 package com.example.myapplication;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +39,10 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_log_in);
 
         this.setTitle("Sign In Here");
+
+        ActionBar actionBar = getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#000000"));
+        actionBar.setBackgroundDrawable(colorDrawable);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -122,18 +129,24 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener{
                     {
                         // user is verified, so you can finish this activity or send user to activity which you want.
                         finish();
+                        String prevActivity = getIntent().getStringExtra("prevActivity");
                         Toast.makeText(getApplicationContext(), "Successfully logged in", Toast.LENGTH_SHORT).show();
-                        Intent intent = getIntent();
-                        String prevActivity = intent.getStringExtra("prevActivity");
+
                         if(prevActivity.equals("CreatePlan"))
                         {
                             Intent intent1 = new Intent(getApplicationContext(),AddPost.class);
+                            intent1.putExtra("prev","Menu");
                             startActivity(intent1);
                         }
 
                         else if(prevActivity.equals("Menu"))
                         {
                             Intent intent1 = new Intent(getApplicationContext(),Menu.class);
+                            startActivity(intent1);
+                        }
+                        else if(prevActivity.equals("Review"))
+                        {
+                            Intent intent1 = new Intent(getApplicationContext(),Dhaka.class);
                             startActivity(intent1);
                         }
                     }

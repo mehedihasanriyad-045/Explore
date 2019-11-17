@@ -26,12 +26,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -46,7 +48,7 @@ import java.util.Calendar;
 public class AddPost extends AppCompatActivity implements View.OnClickListener {
 
     private Button postBtn, dateBtn, viewEvents;
-    private EditText addTourplace;
+    private EditText addTourplace,tourDesc;
     private EditText tourDuration, tourCost;
     private TextView dateView;
     private TextView date;
@@ -81,7 +83,9 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
 
     Context context;
 
+    FirebaseUser firebaseUser;
 
+    String prev,det_name;
 
 
 
@@ -92,6 +96,12 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post);
 
+        ActionBar actionBar = getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#000000"));
+        actionBar.setBackgroundDrawable(colorDrawable);
+
+
+
         postBtn = findViewById(R.id.btnPost);
         viewEvents = findViewById(R.id.btnNewsFeed);
         addTourplace = findViewById(R.id.tourPlace);
@@ -101,8 +111,15 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
         addPlacesImg = findViewById(R.id.imageSelectForTour);
         dateView = findViewById(R.id.fldDesc);
         progressBaraddpost = findViewById(R.id.progressbaraddpost);
+        tourDesc = findViewById(R.id.tourDesc);
 
         //eventsAdapter = new EventsAdapter(getApplicationContext(), )
+
+        prev = getIntent().getStringExtra("prev");
+        if(prev.equals("Details")){
+            det_name = getIntent().getStringExtra("name");
+            addTourplace.setText(det_name);
+        }
 
 
 
@@ -127,13 +144,11 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
                 int  month= calendar.get(Calendar.MONTH);
                 int  day= calendar.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dateDialog= new DatePickerDialog(
-                        AddPost.this,
+                DatePickerDialog dateDialog= new DatePickerDialog(AddPost.this,R.style.DialogTheme,
                         dateSetListener,
                         year,month,day);
 
                 dateDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-
                 dateDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 dateDialog.show();
             }
@@ -192,6 +207,11 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
                 intent.putExtra("prevActivity", "Menu");
                 startActivity(intent);
             }
+        }
+        if(item.getItemId() == R.id.ProfileMenuId){
+
+            Intent intent = new Intent(getApplicationContext(), Profile.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -303,10 +323,12 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
         final String duration = tourDuration.getText().toString();
         final String amount = tourCost.getText().toString();
         final String adate = dateView.getText().toString().trim();
-                addTourplace.setText("");
-                tourDuration.setText("");
-                tourCost.setText("");
-                dateView.setText("");
+        final String desc = tourDesc.getText().toString().trim();
+        addTourplace.setText("");
+        tourDuration.setText("");
+        tourCost.setText("");
+        dateView.setText("");
+        tourDesc.setText("");
 
 
         StorageReference ref = storageReference.child(System.currentTimeMillis()+"."+GetFileExtension(FilePathUri));
@@ -321,7 +343,9 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
                         Task<Uri> uriTask = taskSnapshot.getMetadata().getReference().getDownloadUrl();
                         while(!uriTask.isSuccessful());
                         Uri downloduri = uriTask.getResult();
-                        EventImage eventImage = new EventImage(downloduri.toString(), amount, duration, addtourplaces, adate, FirebaseAuth.getInstance().getCurrentUser().getUid(), java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
+                        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                        String name = firebaseUser.getDisplayName();
+                        EventImage eventImage = new EventImage(downloduri.toString(), amount, duration, addtourplaces, adate, FirebaseAuth.getInstance().getCurrentUser().getUid(), java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()),name,desc);
                         String id = mDatabase.push().getKey();
                         mDatabase.child(id).setValue(eventImage);
                     }

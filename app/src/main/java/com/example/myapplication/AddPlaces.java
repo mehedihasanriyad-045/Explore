@@ -1,12 +1,15 @@
 package com.example.myapplication;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -22,6 +25,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -37,51 +41,42 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
 
     private Button addplacesbtn;
     private EditText addplacesedit, addplacesname;
-    private DatabaseReference mDatabase;
-    private FirebaseStorage mStorage;
-    private StorageReference mStorageref,imageRef;
+
     private ImageView addplacesimg;
-    // Image request code for onActivityResult() .
+
     int Image_Request_Code = 7;
 
-    private ProgressDialog progressDialog ;
-    // Folder path for Firebase Storage.
-    private String Storage_Path = "All_Image_Uploads/";
+    private Uri FilePathUri;
 
-    // Root Database Name for Firebase Database.
-    private String Database_Path = "All_Image_Uploads_Database";
+    private ProgressBar progressBarAdd;
+    private String div;
     StorageTask uploadTask;
 
-    // Creating URI.
-    private Uri FilePathUri;
-    // Creating StorageReference and DatabaseReference object.
+    private DatabaseReference databaseReference,databaseReference1;
     private StorageReference storageReference;
-    private DatabaseReference databaseReference;
-    private ProgressBar progressBarAdd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_places);
 
+        ActionBar actionBar = getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#000000"));
+        actionBar.setBackgroundDrawable(colorDrawable);
+
+        div = getIntent().getStringExtra("div");
         addplacesbtn = findViewById(R.id.addplacesbtn);
         addplacesedit = findViewById(R.id.addplacesedit);
         addplacesimg = findViewById(R.id.addplaceimg);
         addplacesname = findViewById(R.id.addplacesname);
         progressBarAdd = findViewById(R.id.progressbarAdd);
-        mDatabase = FirebaseDatabase.getInstance().getReference("Places: ");
-        mStorage = FirebaseStorage.getInstance();
-        mStorageref = mStorage.getReference();
         addplacesbtn.setOnClickListener(this);
         addplacesimg.setOnClickListener(this);
-
-
-
-
-
-
         storageReference = FirebaseStorage.getInstance().getReference();
-        databaseReference = FirebaseDatabase.getInstance().getReference(Database_Path);
+        databaseReference = FirebaseDatabase.getInstance().getReference(div+"-Places:");
+        databaseReference1 = FirebaseDatabase.getInstance().getReference(div+"user-Places:");
+
     }
 
     @Override
@@ -155,6 +150,7 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
     private void UploadImageFileToFirebaseStorage() {
         final String imagename = addplacesname.getText().toString().trim();
         final String placesdetails = addplacesedit.getText().toString();
+
         progressBarAdd.setVisibility(View.VISIBLE);
         if(imagename.isEmpty()){
             addplacesname.setError("Enter the image name.");
@@ -186,9 +182,23 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
                         Task<Uri> uriTask = taskSnapshot.getMetadata().getReference().getDownloadUrl();
                         while(!uriTask.isSuccessful());
                         Uri downlodur = uriTask.getResult();
-                        PlacesDesc placesDesc = new PlacesDesc(imagename,downlodur.toString(),placesdetails);
-                        String id = mDatabase.push().getKey();
-                        mDatabase.child(id).setValue(placesDesc);
+                        PlacesDesc placesDesc = new PlacesDesc(imagename,downlodur.toString(),placesdetails,0.0,0.0,0);
+                        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+                        if(email.equals("mehedi.24csedu.045@gmail.com") || email.equals("riyadmehedihasan19@gmail.com"))
+                        {
+
+
+                            String id = databaseReference.push().getKey();
+                            databaseReference.child(id).setValue(placesDesc);
+
+                        }
+
+
+                        else {
+                            String id  = databaseReference1.push().getKey();
+                            databaseReference1.child(id).setValue(placesDesc);
+                        }
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

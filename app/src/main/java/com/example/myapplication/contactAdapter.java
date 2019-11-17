@@ -37,8 +37,8 @@ public class contactAdapter extends ArrayAdapter<contacts> {
         name = view.findViewById(R.id.conName);
         phone = view.findViewById(R.id.conNumber);
 
-        name.setText("Name: "+fontacts.getName());
-        phone.setText("Phone Number: "+fontacts.getPhone());
+        name.setText(fontacts.getName());
+        phone.setText(fontacts.getPhone());
 
         return view;
     }
