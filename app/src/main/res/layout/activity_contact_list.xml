@@ -7,17 +7,6 @@
     android:orientation="vertical"
     tools:context=".ContactList">
 
-    <ListView
-
-        android:id="@+id/contactview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:listSelector="#aa44"
-        android:divider="#000000"
-        android:dividerHeight="4dp">
-
-    </ListView>
-
 
     <Button
         android:layout_width="150dp"
@@ -28,4 +17,20 @@
         android:background="@drawable/buttonshape"
         android:id="@+id/addContacts"
         android:textColor="#FFFFFF"/>
+
+    <ListView
+
+        android:id="@+id/contactview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:listSelector="#ffffff"
+        android:divider="#000000"
+        android:dividerHeight="4dp">
+
+
+
+    </ListView>
+
+
+
 </LinearLayout>
