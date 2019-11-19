@@ -1,8 +1,10 @@
 package com.example.myapplication;
 
+import com.google.firebase.database.Exclude;
+
 public class contacts {
 
-    String name,phone;
+    String name,phone, key;
 
     public contacts(String name, String phone) {
         this.name = name;
@@ -11,6 +13,17 @@ public class contacts {
 
     public contacts() {
     }
+
+
+    @Exclude
+    public String getKey() {
+        return key;
+    }
+    @Exclude
+    public void setKey(String key) {
+        this.key = key;
+    }
+
 
     public String getName() {
         return name;
