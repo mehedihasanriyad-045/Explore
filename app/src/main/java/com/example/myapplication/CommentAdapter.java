@@ -37,7 +37,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
         holder.name.setText(mData.get(position).getUname());
         holder.content.setText(mData.get(position).getContent());
-        holder.date.setText(timestampToString((Long) mData.get(position).getTimestamp()));
+        holder.date.setText(java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
 
     }
 

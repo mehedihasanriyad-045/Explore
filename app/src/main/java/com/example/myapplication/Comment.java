@@ -5,12 +5,12 @@ import com.google.firebase.database.ServerValue;
 public class Comment {
 
     private String content,uid,uname;
-    private Object timestamp;
+    private String timestamp;
 
     public Comment() {
     }
 
-    public Comment(String content, String uid, String uname, Object timestamp) {
+    public Comment(String content, String uid, String uname, String timestamp) {
         this.content = content;
         this.uid = uid;
         this.uname = uname;
@@ -20,9 +20,7 @@ public class Comment {
     public Comment(String content, String uid, String uname) {
         this.content = content;
         this.uid = uid;
-
         this.uname = uname;
-        this.timestamp = ServerValue.TIMESTAMP;
 
     }
 
@@ -51,11 +49,11 @@ public class Comment {
         this.uname = uname;
     }
 
-    public Object getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Object timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 }
