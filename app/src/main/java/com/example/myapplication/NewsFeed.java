@@ -56,34 +56,9 @@ public class NewsFeed extends AppCompatActivity implements View.OnClickListener,
                 .setClickable(new RecyclerTouchListener.OnRowClickListener() {
                     @Override
                     public void onRowClicked(int position) {
-                        //showToast("Clicked");
+                        showToast("Clicked");
                         // HANDLE CLICK ACTION
-
-
-                        Bundle bundle = new Bundle();
-
-
-                        String placeName = eventlist.get(position).getPlace();
-                        String duration = eventlist.get(position).getDuration();
-                        String amount = eventlist.get(position).getAmount();
-                        String date = eventlist.get(position).getDate();
-                        String owner = eventlist.get(position).getName();
-                        String imagename = eventlist.get(position).getImageName();
-                        String phnNum = eventlist.get(position).getDesc();
-
-
                         Intent intent = new Intent(getApplicationContext(), EventDetails.class);
-
-                        bundle.putString("PlaceName", placeName);
-                        bundle.putString("Duration", duration);
-                        bundle.putString("Amount", amount);
-                        bundle.putString("Date", date);
-                        bundle.putString("Owner", owner);
-                        bundle.putString("ImageName", imagename);
-                        bundle.putString("PhoneNumber", phnNum);
-
-                        intent.putExtras(bundle);
-
                         startActivity(intent);
                     }
 
