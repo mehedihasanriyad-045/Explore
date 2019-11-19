@@ -12,56 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <Toolbar
-            android:id="@+id/newsfeedToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="45sp"
-            android:background="@color/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            android:visibility="gone">
-
-            <TextView
-                android:id="@+id/barName"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="22sp"
-                android:gravity="center"
-                android:textColor="#FFFFFF" />
-
-
-        </Toolbar>
-
-        <LinearLayout
-            android:id="@+id/layoutPost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:paddingBottom="4dp"
-            android:paddingTop="4dp"
-            android:background="#E0D8D8">
-
-            <Button
-                android:id="@+id/btnGoPostEvent"
-                android:layout_width="35sp"
-                android:layout_height="35sp"
-                android:layout_marginLeft="1dp"
-                android:background="@drawable/ic_add"
-                android:layout_marginRight="10sp"
-                android:backgroundTint="#888484"/>
-            <TextView
-                android:id="@+id/txtGoPostEvent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:text="Post a Event"
-                android:layout_gravity="center"/>
-
-        </LinearLayout>
-
-
 
 
         <ProgressBar

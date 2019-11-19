@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="#FFFFFF">
 
     <ImageView
         android:paddingTop="10dp"
@@ -21,10 +22,12 @@
         android:id="@+id/divisionView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:verticalSpacing="50dp"
+        android:verticalSpacing="10dp"
         android:horizontalSpacing="10dp"
         android:padding="3dp"
         android:background="#FFFFFF"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:numColumns="2">
 
     </GridView>

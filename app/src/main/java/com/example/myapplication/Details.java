@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -55,6 +56,8 @@ public class Details extends AppCompatActivity {
     public int count;
     DatabaseReference databaseReference;
 
+
+
     CommentAdapter commentAdapter;
     List<Comment> commentList;
     static String COMMENT_KEY = "Comment";
@@ -64,6 +67,8 @@ public class Details extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+
+
 
         //Action Bar
         ActionBar actionBar = getSupportActionBar();
@@ -94,6 +99,7 @@ public class Details extends AppCompatActivity {
         RecyclerViewComment = findViewById(R.id.rec_comment);
         rat = findViewById(R.id.det_rating);
         submit = findViewById(R.id.rat_submit);
+        submit.setVisibility(View.VISIBLE);
         ratingBar = findViewById(R.id.ratingBar);
         detailsImage = findViewById(R.id.detailsImage);
         detailsName = findViewById(R.id.detailsName);
@@ -122,17 +128,30 @@ public class Details extends AppCompatActivity {
                 submit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        count++;
-                        sum = sum + rating;
 
-                        DecimalFormat dec = new DecimalFormat("#0.00");
-                        //Toast.makeText(getApplicationContext(),"Count "+String.valueOf(count)+" Rate: "+String.valueOf(dec.format(rate))+" Sum"+String.valueOf(dec.format(sum)),Toast.LENGTH_SHORT).show();
-                        rate = (sum) / count;
-                        rat.setText("Rating: "+String.valueOf(dec.format(rate)));
-                        databaseReference.child(key).child("rating").setValue(rate);
-                        databaseReference.child(key).child("sum").setValue(sum);
-                        databaseReference.child(key).child("count").setValue(count);
-                        submit.setEnabled(false);
+
+                        if(FirebaseAuth.getInstance().getCurrentUser() == null)
+                        {
+                            Toast.makeText(getApplicationContext(),"You have to log in.",Toast.LENGTH_SHORT).show();
+
+                        }
+                        else
+                        {
+                            count++;
+                            sum = sum + rating;
+
+                            DecimalFormat dec = new DecimalFormat("#0.00");
+                            //Toast.makeText(getApplicationContext(),"Count "+String.valueOf(count)+" Rate: "+String.valueOf(dec.format(rate))+" Sum"+String.valueOf(dec.format(sum)),Toast.LENGTH_SHORT).show();
+                            rate = (sum) / count;
+                            rat.setText("Rating: "+String.valueOf(dec.format(rate)));
+                            databaseReference.child(key).child("rating").setValue(rate);
+                            databaseReference.child(key).child("sum").setValue(sum);
+                            databaseReference.child(key).child("count").setValue(count);
+                            submit.setVisibility(View.GONE);
+                        }
+
+
+
 
                     }
                 });
@@ -179,6 +198,7 @@ public class Details extends AppCompatActivity {
 
 
     }
+
 
 
     private void iniRecyclerViewComment(String key1) {

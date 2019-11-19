@@ -73,7 +73,7 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
         progressBarAdd = findViewById(R.id.progressbarAdd);
         addplacesbtn.setOnClickListener(this);
         addplacesimg.setOnClickListener(this);
-        storageReference = FirebaseStorage.getInstance().getReference();
+        storageReference = FirebaseStorage.getInstance().getReference(div+"'s Place");
         databaseReference = FirebaseDatabase.getInstance().getReference(div+"-Places:");
         databaseReference1 = FirebaseDatabase.getInstance().getReference(div+"user-Places:");
 
@@ -83,13 +83,21 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
     public void onClick(View v) {
 
         if(v.getId() == R.id.addplacesbtn){
-            if(uploadTask != null && uploadTask.isInProgress())
+            if(FirebaseAuth.getInstance().getCurrentUser() == null)
             {
-                Toast.makeText(getApplicationContext(),"Upload in progress.",Toast.LENGTH_SHORT).show();
-            } else {
+                Toast.makeText(getApplicationContext(),"Please log in first",Toast.LENGTH_SHORT).show();
 
-                UploadImageFileToFirebaseStorage();
             }
+            else {
+                if(uploadTask != null && uploadTask.isInProgress())
+                {
+                    Toast.makeText(getApplicationContext(),"Upload in progress.",Toast.LENGTH_SHORT).show();
+                } else {
+
+                    UploadImageFileToFirebaseStorage();
+                }
+            }
+
         }
         else if(v.getId() == R.id.addplaceimg){
             addplacesimage();

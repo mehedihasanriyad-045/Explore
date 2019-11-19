@@ -123,15 +123,38 @@ public class Dhaka extends AppCompatActivity {
                         PlacesDesc selectedItem = placesDescList.get(postion);
                         final String key = selectedItem.getKey();
 
-                        StorageReference storageReference = firebaseStorage.getReferenceFromUrl(selectedItem.getImageurl());
-                        storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
 
+
+                        if(FirebaseAuth.getInstance().getCurrentUser() == null)
+                        {
+                            Toast.makeText(getApplicationContext(),"Sorry! Only admin can delete.",Toast.LENGTH_SHORT).show();
+
+                        }
+                        else
+                        {
+                            String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+                            if(email.equals("mehedi.24csedu.045@gmail.com") || email.equals("riyadmehedihasan19@gmail.com"))
+                            {
                                 databaseReference.child(key).removeValue();
 
+                                StorageReference storageReference = firebaseStorage.getReferenceFromUrl(selectedItem.getImageurl());
+                                storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+
+                                        Toast.makeText(getApplicationContext(),"Deleted!",Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
                             }
-                        });
+
+                            else
+                            {
+                                Toast.makeText(getApplicationContext(),"Sorry! Only admin can delete.",Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
                     }
                 });
                 progressBar.setVisibility(View.INVISIBLE);

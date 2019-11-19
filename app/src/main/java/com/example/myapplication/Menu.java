@@ -99,42 +99,8 @@ public class Menu extends AppCompatActivity {
 
     }
 
-    private void popUpEditText() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Your City Name with country code with comma (example: Dhaka,BD): ");
-
-        final EditText input = new EditText(this);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT);
-
-        input.setLayoutParams(lp);
-
-        builder.setView(input);
 
 
-
-
-        // Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String city = input.getText().toString();
-
-                Intent intent = new Intent(getApplicationContext(),weather.class);
-                intent.putExtra("city",city);
-                startActivity(intent);
-
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        builder.show();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {

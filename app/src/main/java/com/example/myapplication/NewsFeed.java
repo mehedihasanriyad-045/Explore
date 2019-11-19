@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,14 +27,14 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsFeed extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener{
+public class NewsFeed extends AppCompatActivity implements  View.OnTouchListener{
 
     private RecyclerView recyclerView;
     private EventsAdapter eventsAdapter;
     private List<EventImage> eventlist;
     DatabaseReference databaseReference;
     private ProgressBar progressBar;
-    private Button btnPostFromNewsFeed;
+
     RecyclerTouchListener touchListener;
 
 
@@ -41,6 +42,8 @@ public class NewsFeed extends AppCompatActivity implements View.OnClickListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_feed);
+
+
 
         ActionBar actionBar = getSupportActionBar();
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#000000"));
@@ -96,8 +99,7 @@ public class NewsFeed extends AppCompatActivity implements View.OnClickListener,
         progressBar = findViewById(R.id.newsFeedProgressBar);
 
 
-        btnPostFromNewsFeed = findViewById(R.id.btnGoPostEvent);
-        btnPostFromNewsFeed.setOnClickListener(this);
+
 
         eventlist = new ArrayList<>();
 
@@ -136,13 +138,7 @@ public class NewsFeed extends AppCompatActivity implements View.OnClickListener,
         recyclerView.addOnItemTouchListener(touchListener);
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.btnGoPostEvent){
-            Intent intent = new Intent(getApplicationContext(), AddPost.class);
-            startActivity(intent);
-        }
-    }
+
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
