@@ -133,8 +133,9 @@ public class ReviewRequest extends AppCompatActivity {
                                 String desc = placesDescList.get(pos).getPlacesdesc();
                                 String imageurl = placesDescList.get(pos).getImageurl();
                                 PlacesDesc placesDesc = new PlacesDesc(imageName,imageurl,desc,0.0,0.0,0);
-                                String id = databaseReference.push().getKey();
-                                databaseReference1.child(id).setValue(placesDesc);
+                                String key1 = placesDescList.get(pos).getKey();
+                                //String id = databaseReference.push().getKey();
+                                databaseReference1.child(key1).setValue(placesDesc);
 
                                 PlacesDesc selectedItem = placesDescList.get(pos);
                                 final String key = selectedItem.getKey();
