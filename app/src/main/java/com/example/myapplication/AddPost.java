@@ -58,6 +58,12 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
     private StorageReference mStorageref,imageRef;
     private ImageView addPlacesImg;
 
+    private FirebaseAuth mAuth;
+
+
+
+
+
     // Image request code for onActivityResult() .
     int Image_Request_Code = 7;
 
@@ -96,10 +102,15 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post);
 
+
+
+        mAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user = mAuth.getCurrentUser();
+
+
         ActionBar actionBar = getSupportActionBar();
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#000000"));
         actionBar.setBackgroundDrawable(colorDrawable);
-
 
 
         postBtn = findViewById(R.id.btnPost);
@@ -345,7 +356,9 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
                         Uri downloduri = uriTask.getResult();
                         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                         String name = firebaseUser.getDisplayName();
-                        EventImage eventImage = new EventImage(downloduri.toString(), amount, duration, addtourplaces, adate, FirebaseAuth.getInstance().getCurrentUser().getUid(), java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()),name,desc);
+                        EventImage eventImage = new EventImage(downloduri.toString(), amount, duration, addtourplaces, adate, FirebaseAuth.getInstance().getCurrentUser().getUid(), java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()), name,
+                          "01745015414"
+                        );
                         String id = mDatabase.push().getKey();
                         mDatabase.child(id).setValue(eventImage);
                     }
