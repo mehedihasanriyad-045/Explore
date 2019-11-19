@@ -11,12 +11,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Contacts;
 import android.provider.ContactsContract;
+import android.text.util.Linkify;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,13 +35,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContactList extends AppCompatActivity {
-    Button addContacts;
     private ListView listView;
     DatabaseReference databaseReference;
     private List<contacts>contactsList;
     private contactAdapter contactAdapter;
     private FirebaseStorage firebaseStorage;
     ProgressBar progressBar;
+    TextView link;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,9 @@ public class ContactList extends AppCompatActivity {
         progressBar = findViewById(R.id.progress);
 
         firebaseStorage = FirebaseStorage.getInstance();
+
+        link  = findViewById(R.id.link);
+        Linkify.addLinks(link, Linkify.WEB_URLS);
 
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Contacts");
@@ -76,45 +81,7 @@ public class ContactList extends AppCompatActivity {
 
             }
 
-
-
-
-            public void DELETE(int postion) {
-                contacts selectedItem = contactsList.get(postion);
-                final String key = selectedItem.getKey();
-
-                StorageReference storageReference = firebaseStorage.getReferenceFromUrl(selectedItem.getPhone());
-                storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-
-                        databaseReference.child("-LtW2B3E47caLXuauM_8").removeValue();
-
-                    }
-                });
-                progressBar.setVisibility(View.INVISIBLE);
-            }
-
-
-
-
         });
-
-
-
-
-
-        addContacts= findViewById(R.id.addContacts);
-        addContacts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),AddContact.class);
-                startActivity(intent);
-            }
-        });
-
-
-
     }
 
     @Override
@@ -151,7 +118,15 @@ public class ContactList extends AppCompatActivity {
         }
         else{
 
-            getMenuInflater().inflate(R.menu.login_menu_layout, menu);
+            String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+            if(email.equals("mehedi.24csedu.045@gmail.com") || email.equals("riyadmehedihasan19@gmail.com"))
+            {
+                getMenuInflater().inflate(R.menu.admin_contact,menu);
+            }
+
+            else {
+                getMenuInflater().inflate(R.menu.login_menu_layout, menu);
+            }
 
         }
 
@@ -191,6 +166,12 @@ public class ContactList extends AppCompatActivity {
         if(item.getItemId() == R.id.ProfileMenuId){
 
             Intent intent = new Intent(getApplicationContext(), Profile.class);
+            startActivity(intent);
+        }
+
+        if(item.getItemId() == R.id.addNumber){
+
+            Intent intent = new Intent(getApplicationContext(),AddContact.class);
             startActivity(intent);
         }
 

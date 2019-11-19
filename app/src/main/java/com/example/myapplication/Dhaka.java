@@ -128,7 +128,7 @@ public class Dhaka extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
 
-                                databaseReference.child("-LtW2B3E47caLXuauM_8").removeValue();
+                                databaseReference.child(key).removeValue();
 
                             }
                         });
