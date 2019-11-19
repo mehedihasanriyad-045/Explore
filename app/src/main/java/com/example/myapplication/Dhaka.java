@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,7 @@ public class Dhaka extends AppCompatActivity {
     private ProgressBar progressBar;
     private FirebaseStorage firebaseStorage;
     private String key,div;
+    private String TAG = "Dhaka";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,13 +124,12 @@ public class Dhaka extends AppCompatActivity {
                     public void DELETE(int postion) {
                         PlacesDesc selectedItem = placesDescList.get(postion);
                         final String key = selectedItem.getKey();
-
+                        Log.d(TAG,key);
                         StorageReference storageReference = firebaseStorage.getReferenceFromUrl(selectedItem.getImageurl());
                         storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-
-                                databaseReference.child("-LtW2B3E47caLXuauM_8").removeValue();
+                                databaseReference.child(key).removeValue();
 
                             }
                         });
