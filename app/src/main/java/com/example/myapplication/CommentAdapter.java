@@ -37,7 +37,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
         holder.name.setText(mData.get(position).getUname());
         holder.content.setText(mData.get(position).getContent());
-        holder.date.setText(java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
+        holder.date.setText(mData.get(position).getTimestamp());
 
     }
 
@@ -60,14 +60,5 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         }
     }
 
-    private String timestampToString(long time) {
 
-        android.text.format.DateFormat df = new android.text.format.DateFormat();
-        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
-        cal.setTimeInMillis(time * 1000L);
-        return df.format("dd-MM-yyyy hh:mm:ss", cal).toString();
-
-
-
-    }
 }

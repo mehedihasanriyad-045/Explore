@@ -35,6 +35,7 @@ import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Details extends AppCompatActivity {
@@ -171,7 +172,8 @@ public class Details extends AppCompatActivity {
                     String comment_content = detComment.getText().toString();
                     String uid = firebaseUser.getUid();
                     String uname = firebaseUser.getDisplayName();
-                    Comment comment = new Comment(comment_content,uid,uname);
+                    String time = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+                    Comment comment = new Comment(comment_content,uid,uname, time);
                     commentReference.setValue(comment).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {

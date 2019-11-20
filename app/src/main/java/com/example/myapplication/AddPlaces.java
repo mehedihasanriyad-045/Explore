@@ -159,7 +159,7 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
         final String imagename = addplacesname.getText().toString().trim();
         final String placesdetails = addplacesedit.getText().toString();
 
-        progressBarAdd.setVisibility(View.VISIBLE);
+
         if(imagename.isEmpty()){
             addplacesname.setError("Enter the image name.");
             addplacesname.requestFocus();
@@ -176,7 +176,7 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
             addplacesedit.requestFocus();
             return;
         }
-
+        progressBarAdd.setVisibility(View.VISIBLE);
 
         StorageReference ref = storageReference.child(System.currentTimeMillis()+"."+GetFileExtension(FilePathUri));
 
@@ -186,12 +186,22 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                         progressBarAdd.setVisibility(View.GONE);
-                        Toast.makeText(getApplicationContext(),"Place added Done!",Toast.LENGTH_SHORT).show();
+                        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+                        if(email.equals("mehedi.24csedu.045@gmail.com") || email.equals("riyadmehedihasan19@gmail.com"))
+                        {
+                            Toast.makeText(getApplicationContext(),"Place added Done!",Toast.LENGTH_SHORT).show();
+
+                        }
+                        else
+                        {
+                            Toast.makeText(getApplicationContext(),"Your review has been stored. Need admin approval.",Toast.LENGTH_SHORT).show();
+
+                        }
                         Task<Uri> uriTask = taskSnapshot.getMetadata().getReference().getDownloadUrl();
                         while(!uriTask.isSuccessful());
                         Uri downlodur = uriTask.getResult();
                         PlacesDesc placesDesc = new PlacesDesc(imagename,downlodur.toString(),placesdetails,0.0,0.0,0);
-                        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+
                         if(email.equals("mehedi.24csedu.045@gmail.com") || email.equals("riyadmehedihasan19@gmail.com"))
                         {
 
