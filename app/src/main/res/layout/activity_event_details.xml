@@ -7,20 +7,16 @@
     android:fillViewport="false">
 
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="wrap_content">
+
         <LinearLayout android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            xmlns:android="http://schemas.android.com/apk/res/android">
+            android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
-                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="500dp"
+                android:layout_height="wrap_content"
                 xmlns:card_view="http://schemas.android.com/tools"
                 android:layout_margin="4dp"
                 android:id="@+id/cardView"
@@ -33,7 +29,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:clickable="true">
 
@@ -180,32 +176,6 @@
                     </LinearLayout>
 
 
-                    <LinearLayout
-                        android:id="@+id/expand"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:weightSum="5"
-                        android:visibility="gone">
-                        <EditText
-                            android:id="@+id/detFldComment"
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Post a comment"
-                            android:textSize="18sp"
-                            android:layout_margin="10sp"/>
-                        <Button
-                            android:id="@+id/detPostComment"
-                            android:layout_width="match_parent"
-                            android:layout_height="35sp"
-                            android:layout_gravity="center"
-                            android:text="Post"
-                            android:background="@color/colorPrimary"
-                            android:textColor="#3E3D3D"
-                            android:gravity="center"
-                            android:layout_weight="4"/>
-
-                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -221,7 +191,7 @@
 
                             <TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:paddingLeft="15sp"
                                 android:paddingRight="15sp"
                                 android:paddingBottom="9sp"
@@ -233,85 +203,73 @@
                             <TextView
                                 android:id="@+id/detContactNum"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="Mobile Number"
                                 android:textStyle="bold" />
                         </LinearLayout>
                     </LinearLayout>
 
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#ffffff"
-                        android:paddingTop="1dp">
-
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginTop="12dp"
-                            android:src="@drawable/icon"
-                            android:id="@+id/comment_image"/>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:textColor="#16471F"
-                                    android:textStyle="bold"
-                                    android:id="@+id/comment_username"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="16dp"
-                                    android:layout_marginLeft="16dp"
-                                    android:layout_marginTop="12dp"
-                                    android:text="Username"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_marginTop="12dp"
-                                    android:layout_marginEnd="16dp"
-                                    android:textSize="12sp"
-                                    android:text="10.12"
-                                    android:textStyle="bold"
-                                    android:id="@+id/date"/>
-
-                            </LinearLayout>
-
-                            <TextView
-                                android:id="@+id/comment_content"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="16dp"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginEnd="8dp"
-                                android:text="Text Comment Goes Here"
-                                android:textColor="#000000"/>
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
                 </LinearLayout>
+
             </androidx.cardview.widget.CardView>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rCommentView"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="5dp">
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/event_detail_user_img"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/icon"/>
+
+                <EditText
+
+                    android:hint="Write Comment"
+                    android:background="@drawable/edittext"
+                    android:id="@+id/event_detail_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:ems="10"
+                    android:inputType="textMultiLine"/>
+
+                <Button
+                    android:id="@+id/event_detail_add_comment_btn"
+                    android:layout_width="63dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/edittext"
+                    android:text="Add" />
+
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:id="@+id/progressbardet"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="4dp"
+                android:scrollbars="vertical"
+                android:background="#FFFFFF"
+                android:layout_marginBottom="100dp"
+                android:id="@+id/event_rec_comment"
+                android:layout_marginTop="0dp"
+                android:paddingBottom="2dp">
 
             </androidx.recyclerview.widget.RecyclerView>
 

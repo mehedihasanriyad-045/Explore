@@ -63,7 +63,6 @@ public class NewsFeed extends AppCompatActivity implements  View.OnTouchListener
                         // HANDLE CLICK ACTION
 
 
-                        Bundle bundle = new Bundle();
 
 
                         String placeName = eventlist.get(position).getPlace();
@@ -73,19 +72,19 @@ public class NewsFeed extends AppCompatActivity implements  View.OnTouchListener
                         String owner = eventlist.get(position).getName();
                         String imagename = eventlist.get(position).getImageName();
                         String phnNum = eventlist.get(position).getDesc();
+                        String key = eventlist.get(position).getKey();
 
 
                         Intent intent = new Intent(getApplicationContext(), EventDetails.class);
 
-                        bundle.putString("PlaceName", placeName);
-                        bundle.putString("Duration", duration);
-                        bundle.putString("Amount", amount);
-                        bundle.putString("Date", date);
-                        bundle.putString("Owner", owner);
-                        bundle.putString("ImageName", imagename);
-                        bundle.putString("PhoneNumber", phnNum);
-
-                        intent.putExtras(bundle);
+                        intent.putExtra("PlaceName", placeName);
+                        intent.putExtra("Duration", duration);
+                        intent.putExtra("Amount", amount);
+                        intent.putExtra("Date", date);
+                        intent.putExtra("Owner", owner);
+                        intent.putExtra("ImageName", imagename);
+                        intent.putExtra("PhoneNumber", phnNum);
+                        intent.putExtra("key",key);
 
                         startActivity(intent);
                     }

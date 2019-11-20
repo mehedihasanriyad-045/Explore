@@ -356,10 +356,12 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
                         Uri downloduri = uriTask.getResult();
                         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                         String name = firebaseUser.getDisplayName();
-                        EventImage eventImage = new EventImage(downloduri.toString(), amount, duration, addtourplaces, adate, FirebaseAuth.getInstance().getCurrentUser().getUid(), java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()), name,
-                          "01745015414"
-                        );
+                        String email = firebaseUser.getEmail();
                         String id = mDatabase.push().getKey();
+                        EventImage eventImage = new EventImage(downloduri.toString(), amount, duration, addtourplaces, adate, FirebaseAuth.getInstance().getCurrentUser().getUid(), java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()), name,
+                          email,id
+                        );
+
                         mDatabase.child(id).setValue(eventImage);
                     }
                 })

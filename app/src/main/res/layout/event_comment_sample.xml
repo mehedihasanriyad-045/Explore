@@ -6,15 +6,9 @@
     android:background="#ffffff"
     android:paddingTop="1dp">
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/icon"
-        android:id="@+id/comment_image"/>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
@@ -25,7 +19,7 @@
             <TextView
                 android:textColor="#16471F"
                 android:textStyle="bold"
-                android:id="@+id/comment_username"
+                android:id="@+id/event_comment_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -42,12 +36,12 @@
                 android:textSize="12sp"
                 android:text="10.12"
                 android:textStyle="bold"
-                android:id="@+id/date"/>
+                android:id="@+id/event_date"/>
 
         </LinearLayout>
 
         <TextView
-            android:id="@+id/comment_content"
+            android:id="@+id/event_comment_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
