@@ -177,7 +177,7 @@ public class Details extends AppCompatActivity {
                     commentReference.setValue(comment).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Toast.makeText(getApplicationContext(),"Added"+key,Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"Comment added",Toast.LENGTH_SHORT).show();
                             detComment.setText("");
                             add.setVisibility(View.VISIBLE);
                         }
@@ -196,14 +196,14 @@ public class Details extends AppCompatActivity {
             }
         });
 
-        iniRecyclerViewComment(key1);
+        iniRecyclerViewComment();
 
 
     }
 
 
 
-    private void iniRecyclerViewComment(String key1) {
+    private void iniRecyclerViewComment() {
 
         RecyclerViewComment.setLayoutManager(new LinearLayoutManager(this));
 

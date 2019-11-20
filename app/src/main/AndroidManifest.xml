@@ -39,7 +39,7 @@
         <activity android:name=".Menu" />
         <activity android:name=".Dhaka" />
         <activity android:name=".ContactList" />
-        <activity android:name=".EventSample" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
