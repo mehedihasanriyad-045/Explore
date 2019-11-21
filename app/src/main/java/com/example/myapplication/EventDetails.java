@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +29,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -48,11 +52,15 @@ public class EventDetails extends AppCompatActivity {
     DataSnapshot dataSnapshot;
 
     DatabaseReference databaseReference;
+    StorageReference storageReference;
+    private FirebaseStorage firebaseStorage;
 
     Event_Comment_Adapter comment_Adapter;
     List<eventcomment> list;
     static String COMMENT_KEY = "Comment";
-    String key;
+    String key,url;
+
+    int flag = 0;
 
 
     @Override
@@ -77,10 +85,13 @@ public class EventDetails extends AppCompatActivity {
         detailsImage = findViewById(R.id.detCardImageView);
         owner = findViewById(R.id.detCardHostName);
         phnNum = findViewById(R.id.detContactNum);
+        storageReference = FirebaseStorage.getInstance().getReference("Events");
+        firebaseStorage = FirebaseStorage.getInstance();
 
         final Intent intent = getIntent();
         key = intent.getStringExtra("key");
-
+        url = intent.getStringExtra("ImageName");
+        String mail = intent.getStringExtra("PhoneNumber");
         placeName.setText(intent.getStringExtra("PlaceName"));
         duration.setText(intent.getStringExtra("Duration"));
         date.setText(intent.getStringExtra("Date"));
@@ -91,6 +102,14 @@ public class EventDetails extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Events");
+
+        String email = firebaseUser.getEmail();
+
+        if(email.equals(mail)) {
+            flag = 1;
+        }
+        Log.d("News"," "+flag+ " "+email+" "+mail);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,5 +182,33 @@ public class EventDetails extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
 
+        if(flag == 1) {
+            getMenuInflater().inflate(R.menu.delete_event, menu);
+        }
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId() == R.id.delete_event)
+        {
+            databaseReference.child(key).removeValue();
+            StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(url);
+            storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Intent intent = new Intent(getApplicationContext(),NewsFeed.class);
+                    startActivity(intent);
+
+                }
+            });
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }

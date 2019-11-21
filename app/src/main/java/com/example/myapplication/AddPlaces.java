@@ -94,6 +94,7 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
                     Toast.makeText(getApplicationContext(),"Upload in progress.",Toast.LENGTH_SHORT).show();
                 } else {
 
+                    addplacesbtn.setVisibility(View.GONE);
                     UploadImageFileToFirebaseStorage();
                 }
             }

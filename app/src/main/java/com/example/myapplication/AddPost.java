@@ -143,7 +143,7 @@ public class AddPost extends AppCompatActivity implements View.OnClickListener {
         addPlacesImg.setOnClickListener(this);
         dateBtn.setOnClickListener(this);
 
-        storageReference = FirebaseStorage.getInstance().getReference();
+        storageReference = FirebaseStorage.getInstance().getReference("Events");
         databaseReference = FirebaseDatabase.getInstance().getReference(Database_Path);
 
         dateBtn.setOnClickListener(new View.OnClickListener() {

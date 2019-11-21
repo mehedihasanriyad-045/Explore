@@ -107,7 +107,7 @@ public class NewsFeed extends AppCompatActivity implements  View.OnTouchListener
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                eventlist.clear();
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
                     EventImage eventImage = dataSnapshot1.getValue(EventImage.class);
                     eventlist.add(eventImage);
