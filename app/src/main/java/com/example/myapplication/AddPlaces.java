@@ -94,7 +94,7 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
                     Toast.makeText(getApplicationContext(),"Upload in progress.",Toast.LENGTH_SHORT).show();
                 } else {
 
-                    addplacesbtn.setVisibility(View.GONE);
+
                     UploadImageFileToFirebaseStorage();
                 }
             }
@@ -178,7 +178,7 @@ public class AddPlaces extends AppCompatActivity implements View.OnClickListener
             return;
         }
         progressBarAdd.setVisibility(View.VISIBLE);
-
+        addplacesbtn.setVisibility(View.GONE);
         StorageReference ref = storageReference.child(System.currentTimeMillis()+"."+GetFileExtension(FilePathUri));
 
         ref.putFile(FilePathUri)
