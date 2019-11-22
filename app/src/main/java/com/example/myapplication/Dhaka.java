@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Rating;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,12 +26,10 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -78,7 +75,6 @@ public class Dhaka extends AppCompatActivity {
 
 
 
-
         placesDescList = new ArrayList<>();
 
         databaseReference.orderByChild("rating").addValueEventListener(new ValueEventListener() {
@@ -90,15 +86,10 @@ public class Dhaka extends AppCompatActivity {
                 for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren())
                 {
                     PlacesDesc placesDesc = dataSnapshot1.getValue(PlacesDesc.class);
-
                     placesDesc.setKey(dataSnapshot1.getKey());
                     placesDescList.add(placesDesc);
-
-
                 }
-
                 Collections.reverse(placesDescList);
-
 
                 myAdpater  = new MyAdpater(getApplicationContext(),placesDescList);
                 recyclerView.setAdapter(myAdpater);
