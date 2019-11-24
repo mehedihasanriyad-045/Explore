@@ -46,7 +46,7 @@ public class Dhaka extends AppCompatActivity {
 
     private MyAdpater myAdpater;
     private List<PlacesDesc>placesDescList;
-    DatabaseReference databaseReference,commentReference;
+    DatabaseReference databaseReference,commentReference,ratingreferences;
     private ProgressBar progressBar;
     private FirebaseStorage firebaseStorage;
     private String key,div;
@@ -72,6 +72,7 @@ public class Dhaka extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference(div+"-Places:");
         commentReference = FirebaseDatabase.getInstance().getReference(div+" Comment");
+        ratingreferences = FirebaseDatabase.getInstance().getReference(div+" User Rating");
 
 
 
@@ -139,6 +140,8 @@ public class Dhaka extends AppCompatActivity {
                             {
                                 databaseReference.child(key).removeValue();
                                 commentReference.child(key).removeValue();
+                                ratingreferences.child(key).removeValue();
+
 
                                 StorageReference storageReference = firebaseStorage.getReferenceFromUrl(selectedItem.getImageurl());
                                 storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {

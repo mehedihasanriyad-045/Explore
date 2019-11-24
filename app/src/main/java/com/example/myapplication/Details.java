@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -48,20 +49,20 @@ public class Details extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private EditText detComment;
     private Button add,submit;
-    private String prev,key,key1,ratingIndb,sumIndb,countIndb,div,placeName,description;
+    private String prev,key,ratingIndb,sumIndb,countIndb,div,placeName,description;
     RatingBar ratingBar;
     RecyclerView RecyclerViewComment;
-    DataSnapshot dataSnapshot;
+
     public double rate,sum;
-    double mrate;
+
     public int count;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference,ratingref;
 
 
 
     CommentAdapter commentAdapter;
     List<Comment> commentList;
-    static String COMMENT_KEY = "Comment";
+
 
 
     @Override
@@ -138,17 +139,51 @@ public class Details extends AppCompatActivity {
                         }
                         else
                         {
-                            count++;
-                            sum = sum + rating;
 
-                            DecimalFormat dec = new DecimalFormat("#0.00");
-                            //Toast.makeText(getApplicationContext(),"Count "+String.valueOf(count)+" Rate: "+String.valueOf(dec.format(rate))+" Sum"+String.valueOf(dec.format(sum)),Toast.LENGTH_SHORT).show();
-                            rate = (sum) / count;
-                            rat.setText("Rating: "+String.valueOf(dec.format(rate)));
-                            databaseReference.child(key).child("rating").setValue(rate);
-                            databaseReference.child(key).child("sum").setValue(sum);
-                            databaseReference.child(key).child("count").setValue(count);
-                            submit.setVisibility(View.GONE);
+                            ratingref = FirebaseDatabase.getInstance().getReference(div+" User Rating").child(key);
+                            final String uname =firebaseUser.getDisplayName();
+                            final String email = firebaseUser.getEmail();
+                            final String uid = firebaseUser.getUid();
+
+                            ratingref.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                    if(!dataSnapshot.exists())
+                                    {
+                                        count++;
+                                        sum = sum + rating;
+                                        String rating2 = String.valueOf(rating);
+
+                                        DecimalFormat dec = new DecimalFormat("#0.00");
+                                        //Toast.makeText(getApplicationContext(),"Count "+String.valueOf(count)+" Rate: "+String.valueOf(dec.format(rate))+" Sum"+String.valueOf(dec.format(sum)),Toast.LENGTH_SHORT).show();
+                                        rate = (sum) / count;
+                                        rat.setText("Rating: "+String.valueOf(dec.format(rate)));
+                                        databaseReference.child(key).child("rating").setValue(rate);
+                                        databaseReference.child(key).child("sum").setValue(sum);
+                                        databaseReference.child(key).child("count").setValue(count);
+                                        Rating rating1 = new Rating(email,rating2);
+                                        ratingref.child(uid).setValue(rating1);
+
+
+                                    }
+
+                                    else
+                                    {
+                                        Toast.makeText(getApplicationContext(),"Submitted already.",Toast.LENGTH_SHORT).show();
+
+                                    }
+
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+
+
                         }
 
 
@@ -177,7 +212,7 @@ public class Details extends AppCompatActivity {
                     commentReference.setValue(comment).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Toast.makeText(getApplicationContext(),"Comment added",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(),"Comment added",Toast.LENGTH_SHORT).show();
                             detComment.setText("");
                             add.setVisibility(View.VISIBLE);
                         }
