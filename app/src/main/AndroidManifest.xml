@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EventDetails"></activity>
+        <activity android:name=".WhoJoined"></activity>
+        <activity android:name=".EventDetails" />
         <activity android:name=".PlacesName" />
         <activity android:name=".EditPost" />
         <activity android:name=".UserReviewDetails" />
@@ -39,7 +40,6 @@
         <activity android:name=".Menu" />
         <activity android:name=".Dhaka" />
         <activity android:name=".ContactList" />
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

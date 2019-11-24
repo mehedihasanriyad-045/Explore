@@ -33,19 +33,19 @@
             android:textSize="17sp"
             android:textStyle="bold"
             android:hint="Place"
-
             />
 
         <EditText
-            android:id="@+id/tourDesc"
+            android:id="@+id/short_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="12sp"
             android:textSize="17sp"
-            android:textStyle="normal"
-            android:inputType="textMultiLine"
-            android:hint="Short Description"
+            android:textStyle="bold"
+            android:hint="Short description"
             />
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -86,6 +86,15 @@
             android:layout_height="wrap_content"
             android:padding="12sp"
             android:hint="Approximate Amount (taka)"
+            android:inputType="number"/>
+
+        <EditText
+            android:id="@+id/needed"
+            android:layout_width="match_parent"
+            android:textSize="15sp"
+            android:layout_height="wrap_content"
+            android:padding="12sp"
+            android:hint="Member needed"
             android:inputType="number"/>
 
 

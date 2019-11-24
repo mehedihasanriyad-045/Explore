@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".WhoJoined"
+    android:gravity="center"
+    android:background="#FFFFFF">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/icon"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+
+    <ListView
+
+        android:id="@+id/whojoinlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#000000"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:background="@drawable/border_ui">
+
+    </ListView>
+
+
+
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="No one joined"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"/>
+
+
+
+</LinearLayout>

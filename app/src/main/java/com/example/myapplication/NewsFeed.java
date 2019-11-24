@@ -73,6 +73,9 @@ public class NewsFeed extends AppCompatActivity implements  View.OnTouchListener
                         String imagename = eventlist.get(position).getImageName();
                         String phnNum = eventlist.get(position).getDesc();
                         String key = eventlist.get(position).getKey();
+                        String member = eventlist.get(position).getMember();
+                        String shortDesc = eventlist.get(position).getShortDesc();
+                        String need = eventlist.get(position).getNeeded();
 
 
                         Intent intent = new Intent(getApplicationContext(), EventDetails.class);
@@ -85,6 +88,9 @@ public class NewsFeed extends AppCompatActivity implements  View.OnTouchListener
                         intent.putExtra("ImageName", imagename);
                         intent.putExtra("PhoneNumber", phnNum);
                         intent.putExtra("key",key);
+                        intent.putExtra("member",member);
+                        intent.putExtra("short",shortDesc);
+                        intent.putExtra("need",need);
 
                         startActivity(intent);
                     }
